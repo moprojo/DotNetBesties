@@ -9,10 +9,8 @@ namespace DotNetBesties.Helpers;
 public static class DateTimeOffsetHelper
 {
     #region DateTimeOffset
-
-    public static DateTimeOffset ParseExactInvariant(string input, string format, DateTimeStyles styles = DateTimeStyles.None)
+        public static DateTimeOffset ParseExactInvariant(string input, string format, DateTimeStyles styles = DateTimeStyles.None)
         => DateTimeOffset.ParseExact(input, format, CultureInfo.InvariantCulture, styles);
-
 
     public static DateTimeOffset? ParseExactInvariantOrNull(string? input, string format, DateTimeStyles styles = DateTimeStyles.None)
         => DateTimeOffset.TryParseExact(input, format, CultureInfo.InvariantCulture, styles, out var result) ? result : (DateTimeOffset?)null;
@@ -25,7 +23,6 @@ public static class DateTimeOffsetHelper
 
     public static DateTimeOffset ConvertTime(DateTimeOffset value, TimeZoneInfo destination)
         => TimeZoneInfo.ConvertTime(value, destination);
-
 
     public static DateTimeOffset FromUnixTimeSeconds(long seconds)
         => DateTimeOffset.FromUnixTimeSeconds(seconds);
@@ -52,6 +49,5 @@ public static class DateTimeOffsetHelper
         var dto = new DateTimeOffset(dateTime, offset);
         return TimeZoneInfo.ConvertTime(dto, zone);
     }
-
     #endregion
 }

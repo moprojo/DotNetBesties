@@ -9,7 +9,6 @@ namespace DotNetBesties.Helpers;
 public static class DateTimeHelper
 {
     #region DateTime
-
     public static DateTime ParseExactInvariant(string input, string format, DateTimeStyles styles = DateTimeStyles.None)
         => DateTime.ParseExact(input, format, CultureInfo.InvariantCulture, styles);
 
@@ -34,9 +33,6 @@ public static class DateTimeHelper
     public static DateTime FromDateOnly(DateOnly date, TimeOnly time, DateTimeKind kind = DateTimeKind.Unspecified)
         => date.ToDateTime(time, kind);
 
-    public static int IsoWeek(DateTime value)
-        => ISOWeek.GetWeekOfYear(value);
-
     public static DateTime FromUnixTimeSeconds(long seconds)
         => DateTimeOffset.FromUnixTimeSeconds(seconds).DateTime;
 
@@ -48,6 +44,5 @@ public static class DateTimeHelper
 
     public static DateTime? FromUnixTimeMilliseconds(long? milliseconds)
         => milliseconds.HasValue ? FromUnixTimeMilliseconds(milliseconds.Value) : (DateTime?)null;
-
     #endregion
 }

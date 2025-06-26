@@ -16,7 +16,6 @@ public static class TimeSpanHelper
     public static TimeSpan ParseExactInvariant(string input, string[] formats)
         => TimeSpan.ParseExact(input, formats, CultureInfo.InvariantCulture);
 
-
     public static TimeSpan? ParseExactInvariantOrNull(string? input, string format)
         => TimeSpan.TryParseExact(input, format, CultureInfo.InvariantCulture, out var result) ? result : (TimeSpan?)null;
 

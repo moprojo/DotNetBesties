@@ -9,10 +9,8 @@ namespace DotNetBesties.Helpers;
 public static class DateOnlyHelper
 {
     #region DateOnly
-
     public static DateOnly ParseExactInvariant(string input, string format)
         => DateOnly.ParseExact(input, format, CultureInfo.InvariantCulture);
-
 
     public static DateOnly? ParseExactInvariantOrNull(string? input, string format)
         => DateOnly.TryParseExact(input, format, CultureInfo.InvariantCulture, DateTimeStyles.None, out var result) ? result : (DateOnly?)null;
@@ -37,6 +35,5 @@ public static class DateOnlyHelper
 
     public static DateOnly FromDateTimeOffset(DateTimeOffset value)
         => DateOnly.FromDateTime(value.DateTime);
-
     #endregion
 }

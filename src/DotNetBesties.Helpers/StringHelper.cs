@@ -8,19 +8,19 @@ namespace DotNetBesties.Helpers;
 /// </summary>
 public static class StringHelper
 {
-    #region DateTime
-    public static string? FromDateTime(DateTime? value, string format = "O", IFormatProvider? provider = null)
-        => value?.ToString(format, provider ?? CultureInfo.InvariantCulture);
-
-    public static string FromDateTime(DateTime value, string format = "O", IFormatProvider? provider = null)
-        => value.ToString(format, provider ?? CultureInfo.InvariantCulture);
-    #endregion
-
     #region DateOnly
     public static string? FromDateOnly(DateOnly? value, string format = "yyyy-MM-dd", IFormatProvider? provider = null)
         => value?.ToString(format, provider ?? CultureInfo.InvariantCulture);
 
     public static string FromDateOnly(DateOnly value, string format = "yyyy-MM-dd", IFormatProvider? provider = null)
+        => value.ToString(format, provider ?? CultureInfo.InvariantCulture);
+    #endregion
+
+    #region DateTime
+    public static string? FromDateTime(DateTime? value, string format = "O", IFormatProvider? provider = null)
+        => value?.ToString(format, provider ?? CultureInfo.InvariantCulture);
+
+    public static string FromDateTime(DateTime value, string format = "O", IFormatProvider? provider = null)
         => value.ToString(format, provider ?? CultureInfo.InvariantCulture);
     #endregion
 
