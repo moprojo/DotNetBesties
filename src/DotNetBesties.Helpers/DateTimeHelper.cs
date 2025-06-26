@@ -38,11 +38,11 @@ public static class DateTimeHelper
     public static DateTime ToLocalTime(DateTime value)
         => value.Kind == DateTimeKind.Local ? value : value.ToLocalTime();
 
-    public static DateTimeOffset ToDateTimeOffset(DateTime value)
-        => new(value);
+    public static DateTime FromDateTimeOffset(DateTimeOffset value)
+        => value.DateTime;
 
-    public static DateOnly ToDateOnly(DateTime value)
-        => DateOnly.FromDateTime(value);
+    public static DateTime FromDateOnly(DateOnly date, TimeOnly time, DateTimeKind kind = DateTimeKind.Unspecified)
+        => date.ToDateTime(time, kind);
 
     public static int IsoWeek(DateTime value)
         => ISOWeek.GetWeekOfYear(value);

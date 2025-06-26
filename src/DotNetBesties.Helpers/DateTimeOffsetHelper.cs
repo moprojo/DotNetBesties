@@ -59,9 +59,17 @@ public static class DateTimeOffsetHelper
     public static DateTimeOffset? FromUnixTimeMilliseconds(long? milliseconds)
         => milliseconds.HasValue ? DateTimeOffset.FromUnixTimeMilliseconds(milliseconds.Value) : (DateTimeOffset?)null;
 
-    public static DateTime ToDateTime(DateTimeOffset value)
-        => value.DateTime;
+    public static DateTimeOffset FromDateTime(DateTime value)
+        => new(value);
 
-    public static DateOnly ToDateOnly(DateTimeOffset value)
-        => DateOnly.FromDateTime(value.DateTime);
+    public static DateTimeOffset FromDateOnly(DateOnly date, TimeOnly time, TimeSpan offset)
+        => new(date.ToDateTime(time, DateTimeKind.Unspecified), offset);
+
+    public static DateTimeOffset FromDateOnly(DateOnly date, TimeOnly time, TimeZoneInfo zone)
+    {
+        var dateTime = date.ToDateTime(time, DateTimeKind.Unspecified);
+        var offset = zone.GetUtcOffset(dateTime);
+        var dto = new DateTimeOffset(dateTime, offset);
+        return TimeZoneInfo.ConvertTime(dto, zone);
+    }
 }
