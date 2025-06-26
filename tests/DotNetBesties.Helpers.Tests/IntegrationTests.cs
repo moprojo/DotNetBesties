@@ -11,7 +11,7 @@ public class IntegrationTests
     {
         var now = new DateTime(2024, 7, 1, 0, 0, 0, DateTimeKind.Utc);
         var dto = DateTimeOffsetHelper.FromDateTime(now);
-        var unix = DateTimeOffsetHelper.ToUnixTimeSeconds(dto);
+        var unix = LongHelper.ToUnixTimeSeconds(dto);
         var backDto = DateTimeOffsetHelper.FromUnixTimeSeconds(unix);
         Assert.Equal(dto, backDto);
     }

@@ -18,14 +18,14 @@ public class TimeSpanHelperTests
     public void Format_ShouldReturnInvariantString()
     {
         var ts = new TimeSpan(1,2,3);
-        var formatted = TimeSpanHelper.Format(ts);
+        var formatted = StringHelper.FromTimeSpan(ts);
         Assert.Equal("01:02:03", formatted);
     }
 
     [Fact]
     public void Format_NullableNull_ReturnsNull()
     {
-        string? result = TimeSpanHelper.Format((TimeSpan?)null);
+        string? result = StringHelper.FromTimeSpan((TimeSpan?)null);
         Assert.Null(result);
     }
 
