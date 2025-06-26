@@ -22,4 +22,27 @@ public class DateTimeHelperTests
         var ok = DateTimeHelper.TryParseExactInvariant("invalid", "O", out var _);
         Assert.False(ok);
     }
+
+    [Fact]
+    public void Format_NullableNull_ReturnsNull()
+    {
+        string? result = DateTimeHelper.Format((DateTime?)null);
+        Assert.Null(result);
+    }
+
+    [Fact]
+    public void ParseExactInvariantOrNull_Invalid_ReturnsNull()
+    {
+        var result = DateTimeHelper.ParseExactInvariantOrNull("bad", "O");
+        Assert.Null(result);
+    }
+
+    [Fact]
+    public void UnixTimeConversions_ShouldRoundTrip()
+    {
+        var dt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        var unix = DateTimeHelper.ToUnixTimeSeconds(dt);
+        var back = DateTimeHelper.FromUnixTimeSeconds(unix);
+        Assert.Equal(dt, DateTime.SpecifyKind(back, DateTimeKind.Utc));
+    }
 }

@@ -15,4 +15,15 @@ public class IntegrationTests
         var backDto = DateTimeOffsetHelper.FromUnixTimeSeconds(unix);
         Assert.Equal(dto, backDto);
     }
+
+    [Fact]
+    public void DateOnly_ToDateTimeOffset_WithZone_RoundTrip()
+    {
+        var date = new DateOnly(2024, 12, 24);
+        var time = new TimeOnly(10, 0);
+        var zone = TimeZoneInfo.Utc;
+        var dto = DateOnlyHelper.ToDateTimeOffset(date, time, zone);
+        var backDate = DateOnly.FromDateTime(dto.UtcDateTime);
+        Assert.Equal(date, backDate);
+    }
 }

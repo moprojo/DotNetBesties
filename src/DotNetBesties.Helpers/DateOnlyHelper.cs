@@ -8,14 +8,26 @@ namespace DotNetBesties.Helpers;
 /// </summary>
 public static class DateOnlyHelper
 {
+    public static string? Format(DateOnly? value, string format = "yyyy-MM-dd", IFormatProvider? provider = null)
+        => value?.ToString(format, provider ?? CultureInfo.InvariantCulture);
+
     public static string Format(DateOnly value, string format = "yyyy-MM-dd", IFormatProvider? provider = null)
-        => value.ToString(format, provider ?? CultureInfo.InvariantCulture);
+        => Format((DateOnly?)value, format, provider)!;
 
     public static DateOnly ParseExactInvariant(string input, string format)
         => DateOnly.ParseExact(input, format, CultureInfo.InvariantCulture);
 
     public static bool TryParseExactInvariant(string input, string format, out DateOnly result)
         => DateOnly.TryParseExact(input, format, CultureInfo.InvariantCulture, DateTimeStyles.None, out result);
+
+    public static bool TryParseExactInvariant(string? input, string[] formats, out DateOnly result)
+        => DateOnly.TryParseExact(input, formats, CultureInfo.InvariantCulture, DateTimeStyles.None, out result);
+
+    public static DateOnly? ParseExactInvariantOrNull(string? input, string format)
+        => DateOnly.TryParseExact(input, format, CultureInfo.InvariantCulture, DateTimeStyles.None, out var result) ? result : (DateOnly?)null;
+
+    public static DateOnly? ParseExactInvariantOrNull(string? input, string[] formats)
+        => DateOnly.TryParseExact(input, formats, CultureInfo.InvariantCulture, DateTimeStyles.None, out var result) ? result : (DateOnly?)null;
 
     public static DateOnly AddDays(DateOnly value, int days)
         => value.AddDays(days);
@@ -28,4 +40,21 @@ public static class DateOnlyHelper
 
     public static DateOnly FromDateTime(DateTime dateTime)
         => DateOnly.FromDateTime(dateTime);
+
+    public static DateOnly FromUnixTimeSeconds(long seconds)
+        => DateOnly.FromDateTime(DateTimeOffset.FromUnixTimeSeconds(seconds).DateTime);
+
+    public static DateOnly? FromUnixTimeSeconds(long? seconds)
+        => seconds.HasValue ? FromUnixTimeSeconds(seconds.Value) : (DateOnly?)null;
+
+    public static DateTimeOffset ToDateTimeOffset(DateOnly date, TimeOnly time, TimeSpan offset)
+        => new(date.ToDateTime(time, DateTimeKind.Unspecified), offset);
+
+    public static DateTimeOffset ToDateTimeOffset(DateOnly date, TimeOnly time, TimeZoneInfo zone)
+    {
+        var dateTime = date.ToDateTime(time, DateTimeKind.Unspecified);
+        var offset = zone.GetUtcOffset(dateTime);
+        var dto = new DateTimeOffset(dateTime, offset);
+        return TimeZoneInfo.ConvertTime(dto, zone);
+    }
 }

@@ -14,4 +14,18 @@ public class DateTimeOffsetHelperTests
         var fromSeconds = DateTimeOffsetHelper.FromUnixTimeSeconds(seconds);
         Assert.Equal(dto, fromSeconds);
     }
+
+    [Fact]
+    public void Format_NullableNull_ReturnsNull()
+    {
+        string? result = DateTimeOffsetHelper.Format((DateTimeOffset?)null);
+        Assert.Null(result);
+    }
+
+    [Fact]
+    public void ParseExactInvariantOrNull_Invalid_ReturnsNull()
+    {
+        var result = DateTimeOffsetHelper.ParseExactInvariantOrNull("bad", "O");
+        Assert.Null(result);
+    }
 }

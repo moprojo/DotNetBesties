@@ -8,14 +8,26 @@ namespace DotNetBesties.Helpers;
 /// </summary>
 public static class DateTimeHelper
 {
+    public static string? Format(DateTime? value, string format = "O", IFormatProvider? provider = null)
+        => value?.ToString(format, provider ?? CultureInfo.InvariantCulture);
+
     public static string Format(DateTime value, string format = "O", IFormatProvider? provider = null)
-        => value.ToString(format, provider ?? CultureInfo.InvariantCulture);
+        => Format((DateTime?)value, format, provider)!;
 
     public static DateTime ParseExactInvariant(string input, string format, DateTimeStyles styles = DateTimeStyles.None)
         => DateTime.ParseExact(input, format, CultureInfo.InvariantCulture, styles);
 
     public static bool TryParseExactInvariant(string input, string format, out DateTime result, DateTimeStyles styles = DateTimeStyles.None)
         => DateTime.TryParseExact(input, format, CultureInfo.InvariantCulture, styles, out result);
+
+    public static bool TryParseExactInvariant(string? input, string[] formats, out DateTime result, DateTimeStyles styles = DateTimeStyles.None)
+        => DateTime.TryParseExact(input, formats, CultureInfo.InvariantCulture, styles, out result);
+
+    public static DateTime? ParseExactInvariantOrNull(string? input, string format, DateTimeStyles styles = DateTimeStyles.None)
+        => DateTime.TryParseExact(input, format, CultureInfo.InvariantCulture, styles, out var result) ? result : (DateTime?)null;
+
+    public static DateTime? ParseExactInvariantOrNull(string? input, string[] formats, DateTimeStyles styles = DateTimeStyles.None)
+        => DateTime.TryParseExact(input, formats, CultureInfo.InvariantCulture, styles, out var result) ? result : (DateTime?)null;
 
     public static DateTime SpecifyKind(DateTime value, DateTimeKind kind)
         => DateTime.SpecifyKind(value, kind);
@@ -34,4 +46,22 @@ public static class DateTimeHelper
 
     public static int IsoWeek(DateTime value)
         => ISOWeek.GetWeekOfYear(value);
+
+    public static long ToUnixTimeSeconds(DateTime value)
+        => new DateTimeOffset(value).ToUnixTimeSeconds();
+
+    public static long ToUnixTimeMilliseconds(DateTime value)
+        => new DateTimeOffset(value).ToUnixTimeMilliseconds();
+
+    public static DateTime FromUnixTimeSeconds(long seconds)
+        => DateTimeOffset.FromUnixTimeSeconds(seconds).DateTime;
+
+    public static DateTime FromUnixTimeMilliseconds(long milliseconds)
+        => DateTimeOffset.FromUnixTimeMilliseconds(milliseconds).DateTime;
+
+    public static DateTime? FromUnixTimeSeconds(long? seconds)
+        => seconds.HasValue ? FromUnixTimeSeconds(seconds.Value) : (DateTime?)null;
+
+    public static DateTime? FromUnixTimeMilliseconds(long? milliseconds)
+        => milliseconds.HasValue ? FromUnixTimeMilliseconds(milliseconds.Value) : (DateTime?)null;
 }
