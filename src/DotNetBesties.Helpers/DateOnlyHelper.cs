@@ -35,9 +35,6 @@ public static class DateOnlyHelper
     public static DateOnly AddMonths(DateOnly value, int months)
         => value.AddMonths(months);
 
-    public static DateTime ToDateTime(DateOnly date, TimeOnly time, DateTimeKind kind = DateTimeKind.Unspecified)
-        => date.ToDateTime(time, kind);
-
     public static DateOnly FromDateTime(DateTime dateTime)
         => DateOnly.FromDateTime(dateTime);
 
@@ -47,14 +44,6 @@ public static class DateOnlyHelper
     public static DateOnly? FromUnixTimeSeconds(long? seconds)
         => seconds.HasValue ? FromUnixTimeSeconds(seconds.Value) : (DateOnly?)null;
 
-    public static DateTimeOffset ToDateTimeOffset(DateOnly date, TimeOnly time, TimeSpan offset)
-        => new(date.ToDateTime(time, DateTimeKind.Unspecified), offset);
-
-    public static DateTimeOffset ToDateTimeOffset(DateOnly date, TimeOnly time, TimeZoneInfo zone)
-    {
-        var dateTime = date.ToDateTime(time, DateTimeKind.Unspecified);
-        var offset = zone.GetUtcOffset(dateTime);
-        var dto = new DateTimeOffset(dateTime, offset);
-        return TimeZoneInfo.ConvertTime(dto, zone);
-    }
+    public static DateOnly FromDateTimeOffset(DateTimeOffset value)
+        => DateOnly.FromDateTime(value.DateTime);
 }

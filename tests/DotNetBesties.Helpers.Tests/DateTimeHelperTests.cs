@@ -45,4 +45,21 @@ public class DateTimeHelperTests
         var back = DateTimeHelper.FromUnixTimeSeconds(unix);
         Assert.Equal(dt, DateTime.SpecifyKind(back, DateTimeKind.Utc));
     }
+
+    [Fact]
+    public void FromDateTimeOffset_ShouldReturnDateTime()
+    {
+        var dto = new DateTimeOffset(2024, 6, 1, 1, 2, 3, TimeSpan.Zero);
+        var dt = DateTimeHelper.FromDateTimeOffset(dto);
+        Assert.Equal(dto.DateTime, dt);
+    }
+
+    [Fact]
+    public void FromDateOnly_ShouldCombineDateAndTime()
+    {
+        var date = new DateOnly(2024, 1, 2);
+        var time = new TimeOnly(3, 4, 5);
+        var dt = DateTimeHelper.FromDateOnly(date, time, DateTimeKind.Utc);
+        Assert.Equal(new DateTime(2024, 1, 2, 3, 4, 5, DateTimeKind.Utc), dt);
+    }
 }

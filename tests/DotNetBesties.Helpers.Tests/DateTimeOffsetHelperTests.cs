@@ -28,4 +28,22 @@ public class DateTimeOffsetHelperTests
         var result = DateTimeOffsetHelper.ParseExactInvariantOrNull("bad", "O");
         Assert.Null(result);
     }
+
+    [Fact]
+    public void FromDateTime_ShouldReturnDateTimeOffset()
+    {
+        var dt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        var dto = DateTimeOffsetHelper.FromDateTime(dt);
+        Assert.Equal(new DateTimeOffset(dt), dto);
+    }
+
+    [Fact]
+    public void FromDateOnly_WithOffset_ReturnsDto()
+    {
+        var date = new DateOnly(2024, 2, 3);
+        var time = new TimeOnly(4, 5, 6);
+        var offset = TimeSpan.FromHours(1);
+        var dto = DateTimeOffsetHelper.FromDateOnly(date, time, offset);
+        Assert.Equal(new DateTimeOffset(date.ToDateTime(time), offset), dto);
+    }
 }

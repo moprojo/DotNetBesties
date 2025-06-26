@@ -34,4 +34,12 @@ public class DateOnlyHelperTests
         var result = DateOnlyHelper.ParseExactInvariantOrNull("bad", "yyyy-MM-dd");
         Assert.Null(result);
     }
+
+    [Fact]
+    public void FromDateTimeOffset_ShouldReturnDateOnly()
+    {
+        var dto = new DateTimeOffset(2024, 5, 1, 0, 0, 0, TimeSpan.Zero);
+        var date = DateOnlyHelper.FromDateTimeOffset(dto);
+        Assert.Equal(new DateOnly(2024, 5, 1), date);
+    }
 }
