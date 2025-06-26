@@ -31,7 +31,6 @@ public static class DateOnlyHelper
     public static DateOnly ParseExactInvariant(string input, string format)
         => DateOnly.ParseExact(input, format, CultureInfo.InvariantCulture);
 
-
     public static DateOnly? ParseExactInvariantOrNull(string? input, string format)
         => DateOnly.TryParseExact(input, format, CultureInfo.InvariantCulture, DateTimeStyles.None, out var result) ? result : (DateOnly?)null;
 

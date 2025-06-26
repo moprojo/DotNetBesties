@@ -47,3 +47,5 @@ public static class DateTimeHelper
 
     public static DateTime ToUniversalTime(DateTime value)
         => value.Kind == DateTimeKind.Utc ? value : value.ToUniversalTime();
+    #endregion
+}

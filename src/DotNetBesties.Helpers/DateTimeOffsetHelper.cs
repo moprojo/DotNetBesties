@@ -12,6 +12,7 @@ public static class DateTimeOffsetHelper
 
     public static DateTimeOffset FromDateOnly(DateOnly date, TimeOnly time, TimeSpan offset)
         => new(date.ToDateTime(time, DateTimeKind.Unspecified), offset);
+
     public static DateTimeOffset FromDateOnly(DateOnly date, TimeOnly time, TimeZoneInfo zone)
     {
         var dateTime = date.ToDateTime(time, DateTimeKind.Unspecified);
