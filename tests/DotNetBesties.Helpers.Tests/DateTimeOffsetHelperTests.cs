@@ -10,7 +10,7 @@ public class DateTimeOffsetHelperTests
     public void UnixConversion_RoundTrip()
     {
         var dto = new DateTimeOffset(2024, 6, 1, 12, 0, 0, TimeSpan.Zero);
-        var seconds = DateTimeOffsetHelper.ToUnixTimeSeconds(dto);
+        var seconds = LongHelper.ToUnixTimeSeconds(dto);
         var fromSeconds = DateTimeOffsetHelper.FromUnixTimeSeconds(seconds);
         Assert.Equal(dto, fromSeconds);
     }
@@ -18,7 +18,7 @@ public class DateTimeOffsetHelperTests
     [Fact]
     public void Format_NullableNull_ReturnsNull()
     {
-        string? result = DateTimeOffsetHelper.Format((DateTimeOffset?)null);
+        string? result = StringHelper.FromDateTimeOffset((DateTimeOffset?)null);
         Assert.Null(result);
     }
 

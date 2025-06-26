@@ -17,14 +17,14 @@ public class DateOnlyHelperTests
     public void Format_ShouldUseInvariantCulture()
     {
         var date = new DateOnly(2024, 12, 31);
-        var formatted = DateOnlyHelper.Format(date, "yyyy/MM/dd");
+        var formatted = StringHelper.FromDateOnly(date, "yyyy/MM/dd");
         Assert.Equal("2024/12/31", formatted);
     }
 
     [Fact]
     public void Format_NullableNull_ReturnsNull()
     {
-        string? result = DateOnlyHelper.Format((DateOnly?)null);
+        string? result = StringHelper.FromDateOnly((DateOnly?)null);
         Assert.Null(result);
     }
 
