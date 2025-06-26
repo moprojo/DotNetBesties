@@ -20,4 +20,18 @@ public class DateOnlyHelperTests
         var formatted = DateOnlyHelper.Format(date, "yyyy/MM/dd");
         Assert.Equal("2024/12/31", formatted);
     }
+
+    [Fact]
+    public void Format_NullableNull_ReturnsNull()
+    {
+        string? result = DateOnlyHelper.Format((DateOnly?)null);
+        Assert.Null(result);
+    }
+
+    [Fact]
+    public void ParseExactInvariantOrNull_Invalid_ReturnsNull()
+    {
+        var result = DateOnlyHelper.ParseExactInvariantOrNull("bad", "yyyy-MM-dd");
+        Assert.Null(result);
+    }
 }

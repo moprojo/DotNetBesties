@@ -21,4 +21,18 @@ public class TimeSpanHelperTests
         var formatted = TimeSpanHelper.Format(ts);
         Assert.Equal("01:02:03", formatted);
     }
+
+    [Fact]
+    public void Format_NullableNull_ReturnsNull()
+    {
+        string? result = TimeSpanHelper.Format((TimeSpan?)null);
+        Assert.Null(result);
+    }
+
+    [Fact]
+    public void ParseExactInvariantOrNull_Invalid_ReturnsNull()
+    {
+        var result = TimeSpanHelper.ParseExactInvariantOrNull("bad", "c");
+        Assert.Null(result);
+    }
 }

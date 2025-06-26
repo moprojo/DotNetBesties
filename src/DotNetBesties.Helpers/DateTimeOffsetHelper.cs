@@ -8,14 +8,26 @@ namespace DotNetBesties.Helpers;
 /// </summary>
 public static class DateTimeOffsetHelper
 {
+    public static string? Format(DateTimeOffset? value, string format = "O", IFormatProvider? provider = null)
+        => value?.ToString(format, provider ?? CultureInfo.InvariantCulture);
+
     public static string Format(DateTimeOffset value, string format = "O", IFormatProvider? provider = null)
-        => value.ToString(format, provider ?? CultureInfo.InvariantCulture);
+        => Format((DateTimeOffset?)value, format, provider)!;
 
     public static DateTimeOffset ParseExactInvariant(string input, string format, DateTimeStyles styles = DateTimeStyles.None)
         => DateTimeOffset.ParseExact(input, format, CultureInfo.InvariantCulture, styles);
 
     public static bool TryParseExactInvariant(string input, string format, out DateTimeOffset result, DateTimeStyles styles = DateTimeStyles.None)
         => DateTimeOffset.TryParseExact(input, format, CultureInfo.InvariantCulture, styles, out result);
+
+    public static bool TryParseExactInvariant(string? input, string[] formats, out DateTimeOffset result, DateTimeStyles styles = DateTimeStyles.None)
+        => DateTimeOffset.TryParseExact(input, formats, CultureInfo.InvariantCulture, styles, out result);
+
+    public static DateTimeOffset? ParseExactInvariantOrNull(string? input, string format, DateTimeStyles styles = DateTimeStyles.None)
+        => DateTimeOffset.TryParseExact(input, format, CultureInfo.InvariantCulture, styles, out var result) ? result : (DateTimeOffset?)null;
+
+    public static DateTimeOffset? ParseExactInvariantOrNull(string? input, string[] formats, DateTimeStyles styles = DateTimeStyles.None)
+        => DateTimeOffset.TryParseExact(input, formats, CultureInfo.InvariantCulture, styles, out var result) ? result : (DateTimeOffset?)null;
 
     public static DateTimeOffset ToOffset(DateTimeOffset value, TimeSpan offset)
         => value.ToOffset(offset);
@@ -26,12 +38,30 @@ public static class DateTimeOffsetHelper
     public static long ToUnixTimeSeconds(DateTimeOffset value)
         => value.ToUnixTimeSeconds();
 
+    public static long? ToUnixTimeSeconds(DateTimeOffset? value)
+        => value?.ToUnixTimeSeconds();
+
     public static long ToUnixTimeMilliseconds(DateTimeOffset value)
         => value.ToUnixTimeMilliseconds();
+
+    public static long? ToUnixTimeMilliseconds(DateTimeOffset? value)
+        => value?.ToUnixTimeMilliseconds();
 
     public static DateTimeOffset FromUnixTimeSeconds(long seconds)
         => DateTimeOffset.FromUnixTimeSeconds(seconds);
 
+    public static DateTimeOffset? FromUnixTimeSeconds(long? seconds)
+        => seconds.HasValue ? DateTimeOffset.FromUnixTimeSeconds(seconds.Value) : (DateTimeOffset?)null;
+
     public static DateTimeOffset FromUnixTimeMilliseconds(long milliseconds)
         => DateTimeOffset.FromUnixTimeMilliseconds(milliseconds);
+
+    public static DateTimeOffset? FromUnixTimeMilliseconds(long? milliseconds)
+        => milliseconds.HasValue ? DateTimeOffset.FromUnixTimeMilliseconds(milliseconds.Value) : (DateTimeOffset?)null;
+
+    public static DateTime ToDateTime(DateTimeOffset value)
+        => value.DateTime;
+
+    public static DateOnly ToDateOnly(DateTimeOffset value)
+        => DateOnly.FromDateTime(value.DateTime);
 }
