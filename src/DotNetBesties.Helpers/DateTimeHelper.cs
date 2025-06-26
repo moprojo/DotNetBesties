@@ -9,6 +9,27 @@ namespace DotNetBesties.Helpers;
 public static class DateTimeHelper
 {
     #region DateTime
+    public static DateTime FromDateOnly(DateOnly date, TimeOnly time, DateTimeKind kind = DateTimeKind.Unspecified)
+        => date.ToDateTime(time, kind);
+
+    public static DateTime FromDateTimeOffset(DateTimeOffset value)
+        => value.DateTime;
+
+    public static DateTime FromUnixTimeMilliseconds(long milliseconds)
+        => DateTimeOffset.FromUnixTimeMilliseconds(milliseconds).DateTime;
+
+    public static DateTime? FromUnixTimeMilliseconds(long? milliseconds)
+        => milliseconds.HasValue ? FromUnixTimeMilliseconds(milliseconds.Value) : (DateTime?)null;
+
+    public static DateTime FromUnixTimeSeconds(long seconds)
+        => DateTimeOffset.FromUnixTimeSeconds(seconds).DateTime;
+
+    public static DateTime? FromUnixTimeSeconds(long? seconds)
+        => seconds.HasValue ? FromUnixTimeSeconds(seconds.Value) : (DateTime?)null;
+
+    public static int IsoWeek(DateTime value)
+        => ISOWeek.GetWeekOfYear(value);
+
     public static DateTime ParseExactInvariant(string input, string format, DateTimeStyles styles = DateTimeStyles.None)
         => DateTime.ParseExact(input, format, CultureInfo.InvariantCulture, styles);
 
@@ -21,28 +42,8 @@ public static class DateTimeHelper
     public static DateTime SpecifyKind(DateTime value, DateTimeKind kind)
         => DateTime.SpecifyKind(value, kind);
 
-    public static DateTime ToUniversalTime(DateTime value)
-        => value.Kind == DateTimeKind.Utc ? value : value.ToUniversalTime();
-
     public static DateTime ToLocalTime(DateTime value)
         => value.Kind == DateTimeKind.Local ? value : value.ToLocalTime();
 
-    public static DateTime FromDateTimeOffset(DateTimeOffset value)
-        => value.DateTime;
-
-    public static DateTime FromDateOnly(DateOnly date, TimeOnly time, DateTimeKind kind = DateTimeKind.Unspecified)
-        => date.ToDateTime(time, kind);
-
-    public static DateTime FromUnixTimeSeconds(long seconds)
-        => DateTimeOffset.FromUnixTimeSeconds(seconds).DateTime;
-
-    public static DateTime FromUnixTimeMilliseconds(long milliseconds)
-        => DateTimeOffset.FromUnixTimeMilliseconds(milliseconds).DateTime;
-
-    public static DateTime? FromUnixTimeSeconds(long? seconds)
-        => seconds.HasValue ? FromUnixTimeSeconds(seconds.Value) : (DateTime?)null;
-
-    public static DateTime? FromUnixTimeMilliseconds(long? milliseconds)
-        => milliseconds.HasValue ? FromUnixTimeMilliseconds(milliseconds.Value) : (DateTime?)null;
-    #endregion
-}
+    public static DateTime ToUniversalTime(DateTime value)
+        => value.Kind == DateTimeKind.Utc ? value : value.ToUniversalTime();

@@ -8,12 +8,17 @@ namespace DotNetBesties.Helpers;
 /// </summary>
 public static class BoolHelper
 {
-    #region DateOnly
-    public static bool TryParseExactDateOnlyInvariant(string? input, string format, out DateOnly result)
-        => DateOnly.TryParseExact(input, format, CultureInfo.InvariantCulture, DateTimeStyles.None, out result);
+    #region DateTime
+    public static bool TryParseExactDateTimeInvariant(string? input, string format, out DateTime result, DateTimeStyles styles = DateTimeStyles.None)
+        => DateTime.TryParseExact(input, format, CultureInfo.InvariantCulture, styles, out result);
 
-    public static bool TryParseExactDateOnlyInvariant(string? input, string[] formats, out DateOnly result)
-        => DateOnly.TryParseExact(input, formats, CultureInfo.InvariantCulture, DateTimeStyles.None, out result);
+    public static bool TryParseExactDateTimeInvariant(string? input, string[] formats, out DateTime result, DateTimeStyles styles = DateTimeStyles.None)
+        => DateTime.TryParseExact(input, formats, CultureInfo.InvariantCulture, styles, out result);
+    #endregion
+
+    #region Long
+    public static bool TryParseLongInvariant(string? input, out long result)
+        => long.TryParse(input, NumberStyles.Integer, CultureInfo.InvariantCulture, out result);
     #endregion
 
     #region DateTime
