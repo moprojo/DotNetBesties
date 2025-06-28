@@ -42,4 +42,20 @@ public class DateOnlyHelperTests
         var date = DateOnlyHelper.FromDateTimeOffset(dto);
         Assert.Equal(new DateOnly(2024, 5, 1), date);
     }
+
+    [Fact]
+    public void AddDays_ShouldAddCorrectly()
+    {
+        var date = new DateOnly(2024, 1, 1);
+        var result = DateOnlyHelper.AddDays(date, 5);
+        Assert.Equal(new DateOnly(2024, 1, 6), result);
+    }
+
+    [Fact]
+    public void FromUnixTimeSeconds_ShouldReturnDateOnly()
+    {
+        var unix = new DateTimeOffset(2024, 1, 1, 0, 0, 0, TimeSpan.Zero).ToUnixTimeSeconds();
+        var date = DateOnlyHelper.FromUnixTimeSeconds(unix);
+        Assert.Equal(new DateOnly(2024, 1, 1), date);
+    }
 }

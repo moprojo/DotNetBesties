@@ -32,4 +32,11 @@ public class IntHelperTests
     {
         Assert.Equal(10, IntHelper.ParseInvariant("10"));
     }
+
+    [Fact]
+    public void Millisecond_FromDateTime_ReturnsExpected()
+    {
+        var dt = new DateTime(2024, 1, 1, 0, 0, 0, 123);
+        Assert.Equal(123, IntHelper.Millisecond(dt));
+    }
 }
