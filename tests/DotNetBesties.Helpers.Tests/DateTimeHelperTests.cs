@@ -1,65 +1,83 @@
 using System;
 using System.Globalization;
-using Xunit;
+using TUnit.Assertions;
+using TUnit.Assertions.Extensions;
+using TUnit.Core;
 using DotNetBesties.Helpers;
 
 namespace DotNetBesties.Helpers.Tests;
 
 public class DateTimeHelperTests
 {
-    [Fact]
-    public void Format_RoundTrip_ShouldMatchParse()
+    [Test]
+    public async Task Format_RoundTrip_ShouldMatchParse()
     {
         var now = new DateTime(2024, 4, 5, 10, 20, 30, DateTimeKind.Utc);
         var formatted = StringHelper.FromDateTime(now);
         var parsed = DateTimeHelper.ParseExactInvariant(formatted, "O", DateTimeStyles.RoundtripKind);
-        Assert.Equal(now, parsed);
+        await Assert.That(parsed).IsEqualTo(now);
     }
 
-    [Fact]
-    public void TryParseExactInvariant_Invalid_ReturnsFalse()
+    [Test]
+    public async Task TryParseExactInvariant_Invalid_ReturnsFalse()
     {
         var ok = BoolHelper.TryParseExactDateTimeInvariant("invalid", "O", out var _);
-        Assert.False(ok);
+        await Assert.That(ok).IsFalse();
     }
 
-    [Fact]
-    public void Format_NullableNull_ReturnsNull()
+    [Test]
+    public async Task Format_NullableNull_ReturnsNull()
     {
         string? result = StringHelper.FromDateTime((DateTime?)null);
-        Assert.Null(result);
+        await Assert.That(result).IsNull();
     }
 
-    [Fact]
-    public void ParseExactInvariantOrNull_Invalid_ReturnsNull()
+    [Test]
+    public async Task ParseExactInvariantOrNull_Invalid_ReturnsNull()
     {
         var result = DateTimeHelper.ParseExactInvariantOrNull("bad", "O");
-        Assert.Null(result);
+        await Assert.That(result).IsNull();
     }
 
-    [Fact]
-    public void UnixTimeConversions_ShouldRoundTrip()
+    [Test]
+    public async Task UnixTimeConversions_ShouldRoundTrip()
     {
         var dt = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc);
         var unix = LongHelper.ToUnixTimeSeconds(dt);
         var back = DateTimeHelper.FromUnixTimeSeconds(unix);
-        Assert.Equal(dt, DateTime.SpecifyKind(back, DateTimeKind.Utc));
+        await Assert.That(DateTime.SpecifyKind(back, DateTimeKind.Utc)).IsEqualTo(dt);
     }
 
-    [Fact]
-    public void FromDateTimeOffset_ShouldReturnDateTime()
+    [Test]
+    public async Task FromDateTimeOffset_ShouldReturnDateTime()
     {
         var dto = new DateTimeOffset(2024, 6, 1, 1, 2, 3, TimeSpan.Zero);
         var dt = DateTimeHelper.FromDateTimeOffset(dto);
-        Assert.Equal(dto.DateTime, dt);
+        await Assert.That(dt).IsEqualTo(dto.DateTime);
     }
 
-    [Fact]
-    public void FromDateOnly_ShouldCombineDateAndTime()
+    [Test]
+    public async Task FromDateOnly_ShouldCombineDateAndTime()
     {
         var date = new DateOnly(2024, 1, 2);
         var time = new TimeOnly(3, 4, 5);
         var dt = DateTimeHelper.FromDateOnly(date, time, DateTimeKind.Utc);
-        Assert.Equal(new DateTime(2024, 1, 2, 3, 4, 5, DateTimeKind.Utc), dt);
+        await Assert.That(dt).IsEqualTo(new DateTime(2024, 1, 2, 3, 4, 5, DateTimeKind.Utc));
+    }
+
+    [Test]
+    public async Task ToLocalTime_ShouldReturnLocalTime()
+    {
+        var utc = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        var local = DateTimeHelper.ToLocalTime(utc);
+        await Assert.That(local.Kind).IsEqualTo(DateTimeKind.Local);
+    }
+
+    [Test]
+    public async Task ToUniversalTime_Null_ReturnsNull()
+    {
+        DateTime? input = null;
+        var result = DateTimeHelper.ToUniversalTime(input);
+        await Assert.That(result).IsNull();
     }
 }
