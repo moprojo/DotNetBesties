@@ -28,5 +28,15 @@ public static class CharHelper
     /// </summary>
     public static char GetFirstOrDefault(string? input, char defaultChar = '\0')
         => string.IsNullOrEmpty(input) ? defaultChar : input![0];
+    /// <summary>
+    /// Returns the last character of the string or the specified default if the string is null or empty.
+    /// </summary>
+    public static char GetLastOrDefault(string? input, char defaultChar = '\0')
+        => string.IsNullOrEmpty(input) ? defaultChar : input![input.Length - 1];
+    /// <summary>
+    /// Returns the character at the specified index or the specified default if the index is out of bounds.
+    /// </summary>
+    public static char GetAtOrDefault(string? input, int index, char defaultChar = '\0')
+        => input != null && index >= 0 && index < input.Length ? input[index] : defaultChar;
     #endregion
 }

@@ -94,5 +94,8 @@ public static class DateTimeHelper
     public static DateTime ToUniversalTime(DateTime value)
         => value.Kind == DateTimeKind.Utc ? value : value.ToUniversalTime();
 
+    public static DateTime? ToUniversalTime(DateTime? value)
+        => value.HasValue ? ToUniversalTime(value.Value) : (DateTime?)null;
+
     #endregion
 }
