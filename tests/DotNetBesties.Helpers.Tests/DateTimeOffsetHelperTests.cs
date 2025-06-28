@@ -54,4 +54,21 @@ public class DateTimeOffsetHelperTests
         var dto = DateTimeOffsetHelper.FromDateOnly(date, time, offset);
         Assert.Equal(new DateTimeOffset(date.ToDateTime(time), offset), dto);
     }
+
+    [Fact]
+    public void ConvertTime_ShouldChangeTimeZone()
+    {
+        var dto = new DateTimeOffset(2024, 1, 1, 0, 0, 0, TimeSpan.Zero);
+        var zone = TimeZoneInfo.CreateCustomTimeZone("plus2", TimeSpan.FromHours(2), "plus2", "plus2");
+        var converted = DateTimeOffsetHelper.ConvertTime(dto, zone);
+        Assert.Equal(dto.ToOffset(TimeSpan.FromHours(2)), converted);
+    }
+
+    [Fact]
+    public void ToOffset_ShouldApplyOffset()
+    {
+        var dto = new DateTimeOffset(2024, 1, 1, 0, 0, 0, TimeSpan.Zero);
+        var result = DateTimeOffsetHelper.ToOffset(dto, TimeSpan.FromHours(1));
+        Assert.Equal(dto.ToOffset(TimeSpan.FromHours(1)), result);
+    }
 }

@@ -62,4 +62,20 @@ public class DateTimeHelperTests
         var dt = DateTimeHelper.FromDateOnly(date, time, DateTimeKind.Utc);
         Assert.Equal(new DateTime(2024, 1, 2, 3, 4, 5, DateTimeKind.Utc), dt);
     }
+
+    [Fact]
+    public void ToLocalTime_ShouldReturnLocalTime()
+    {
+        var utc = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        var local = DateTimeHelper.ToLocalTime(utc);
+        Assert.Equal(utc.ToLocalTime(), local);
+    }
+
+    [Fact]
+    public void ToUniversalTime_Null_ReturnsNull()
+    {
+        DateTime? value = null;
+        var result = DateTimeHelper.ToUniversalTime(value);
+        Assert.Null(result);
+    }
 }

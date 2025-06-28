@@ -22,4 +22,21 @@ public class DoubleHelperTests
         var result = DoubleHelper.TotalMinutes(ts);
         Assert.Equal(ts.TotalMinutes, result);
     }
+
+    [Fact]
+    public void ToOADate_FromDateTimeOffset_RoundTrip()
+    {
+        var dto = new DateTimeOffset(2024, 1, 1, 0, 0, 0, TimeSpan.Zero);
+        var oa = DoubleHelper.ToOADate(dto);
+        var back = DateTime.FromOADate(oa);
+        Assert.Equal(dto.DateTime, back);
+    }
+
+    [Fact]
+    public void TotalSeconds_ShouldReturnExpected()
+    {
+        var ts = TimeSpan.FromSeconds(90);
+        var result = DoubleHelper.TotalSeconds(ts);
+        Assert.Equal(ts.TotalSeconds, result);
+    }
 }
