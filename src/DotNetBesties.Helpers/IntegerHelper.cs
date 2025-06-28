@@ -4,7 +4,7 @@ using System.Globalization;
 namespace DotNetBesties.Helpers;
 
 /// <summary>
-/// Utility methods for working with <see cref="TimeSpan"/> values.
+/// Helpers for operations that produce <see cref="int"/> results.
 /// </summary>
 public static class IntegerHelper
 {
