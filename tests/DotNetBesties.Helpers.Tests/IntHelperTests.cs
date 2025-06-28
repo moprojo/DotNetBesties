@@ -1,35 +1,86 @@
 using System;
+using TUnit.Assertions;
+using TUnit.Assertions.Extensions;
+using TUnit.Core;
 using DotNetBesties.Helpers;
-using Xunit;
 
 namespace DotNetBesties.Helpers.Tests;
 
 public class IntHelperTests
 {
-    [Fact]
-    public void Year_FromDateTime_ReturnsExpected()
+    [Test]
+    public async Task Year_FromDateTime_ReturnsExpected()
     {
         var dt = new DateTime(2025, 6, 15);
-        Assert.Equal(2025, IntHelper.Year(dt));
+        await Assert.That(IntHelper.Year(dt)).IsEqualTo(2025);
     }
 
-    [Fact]
-    public void DayOfYear_FromDateOnly_ReturnsExpected()
+    [Test]
+    public async Task DayOfYear_FromDateOnly_ReturnsExpected()
     {
         var date = new DateOnly(2025, 2, 1);
-        Assert.Equal(date.DayOfYear, IntHelper.DayOfYear(date));
+        await Assert.That(IntHelper.DayOfYear(date)).IsEqualTo(date.DayOfYear);
     }
 
-    [Fact]
-    public void Hours_FromTimeSpan_ReturnsExpected()
+    [Test]
+    public async Task Hours_FromTimeSpan_ReturnsExpected()
     {
         var ts = TimeSpan.FromHours(5);
-        Assert.Equal(5, IntHelper.Hours(ts));
+        await Assert.That(IntHelper.Hours(ts)).IsEqualTo(5);
     }
 
-    [Fact]
-    public void ParseInvariant_ShouldParseString()
+    [Test]
+    public async Task ParseInvariant_ShouldParseString()
     {
-        Assert.Equal(10, IntHelper.ParseInvariant("10"));
+        await Assert.That(IntHelper.ParseInvariant("10")).IsEqualTo(10);
+    }
+
+    [Test]
+    public async Task Day_FromDateOnly_ReturnsExpected()
+    {
+        var date = new DateOnly(2025, 3, 4);
+        await Assert.That(IntHelper.Day(date)).IsEqualTo(4);
+    }
+
+    [Test]
+    public async Task Month_FromDateOnly_ReturnsExpected()
+    {
+        var date = new DateOnly(2025, 3, 4);
+        await Assert.That(IntHelper.Month(date)).IsEqualTo(3);
+    }
+
+    [Test]
+    public async Task Year_FromDateOnly_ReturnsExpected()
+    {
+        var date = new DateOnly(2025, 3, 4);
+        await Assert.That(IntHelper.Year(date)).IsEqualTo(2025);
+    }
+
+    [Test]
+    public async Task Day_FromDateTime_ReturnsExpected()
+    {
+        var dt = new DateTime(2025, 6, 15, 1, 2, 3);
+        await Assert.That(IntHelper.Day(dt)).IsEqualTo(15);
+    }
+
+    [Test]
+    public async Task DayOfYear_FromDateTimeOffset_ReturnsExpected()
+    {
+        var dto = new DateTimeOffset(2025, 12, 31, 0, 0, 0, TimeSpan.Zero);
+        await Assert.That(IntHelper.DayOfYear(dto)).IsEqualTo(dto.DayOfYear);
+    }
+
+    [Test]
+    public async Task Minutes_FromTimeSpan_ReturnsExpected()
+    {
+        var ts = TimeSpan.FromMinutes(90);
+        await Assert.That(IntHelper.Minutes(ts)).IsEqualTo(ts.Minutes);
+    }
+
+    [Test]
+    public async Task Milliseconds_FromTimeSpan_ReturnsExpected()
+    {
+        var ts = TimeSpan.FromMilliseconds(1234);
+        await Assert.That(IntHelper.Milliseconds(ts)).IsEqualTo(ts.Milliseconds);
     }
 }
