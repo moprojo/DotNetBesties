@@ -21,7 +21,7 @@ public class FloatHelperTests
     {
         var dto = new DateTimeOffset(2024, 3, 1, 0, 0, 0, TimeSpan.Zero);
         var oa = FloatHelper.ToOADate(dto);
-        var back = new DateTimeOffset(DateTime.FromOADate(oa));
+        var back = new DateTimeOffset(DateTime.SpecifyKind(DateTime.FromOADate(oa), DateTimeKind.Utc));
         await Assert.That(back.UtcDateTime).IsEqualTo(dto.UtcDateTime);
     }
 }

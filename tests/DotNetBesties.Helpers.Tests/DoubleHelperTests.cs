@@ -30,7 +30,7 @@ public class DoubleHelperTests
     {
         var dto = new DateTimeOffset(2024, 7, 1, 0, 0, 0, TimeSpan.Zero);
         var oa = DoubleHelper.ToOADate(dto);
-        var back = new DateTimeOffset(DateTime.FromOADate(oa));
+        var back = new DateTimeOffset(DateTime.SpecifyKind(DateTime.FromOADate(oa), DateTimeKind.Utc));
         await Assert.That(back.UtcDateTime).IsEqualTo(dto.UtcDateTime);
     }
 
