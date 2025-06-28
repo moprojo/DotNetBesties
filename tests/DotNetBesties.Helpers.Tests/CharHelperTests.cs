@@ -1,44 +1,46 @@
-using Xunit;
+using TUnit.Assertions;
+using TUnit.Assertions.Extensions;
+using TUnit.Core;
 using DotNetBesties.Helpers;
 
 namespace DotNetBesties.Helpers.Tests;
 
 public class CharHelperTests
 {
-    [Fact]
-    public void GetFirstOrDefault_ShouldReturnFirstChar()
+    [Test]
+    public async Task GetFirstOrDefault_ShouldReturnFirstChar()
     {
         var result = CharHelper.GetFirstOrDefault("abc");
-        Assert.Equal('a', result);
+        await Assert.That(result).IsEqualTo('a');
     }
 
-    [Fact]
-    public void GetFirstOrDefault_Null_ReturnsDefault()
+    [Test]
+    public async Task GetFirstOrDefault_Null_ReturnsDefault()
     {
         var result = CharHelper.GetFirstOrDefault(null, '?');
-        Assert.Equal('?', result);
+        await Assert.That(result).IsEqualTo('?');
     }
 
-    [Fact]
-    public void GetLastOrDefault_ShouldReturnLastChar()
+    [Test]
+    public async Task GetAtOrDefault_OutOfRange_ReturnsDefault()
     {
-        var result = CharHelper.GetLastOrDefault("abc");
-        Assert.Equal('c', result);
+        var result = CharHelper.GetAtOrDefault("abc", 5, '!');
+        await Assert.That(result).IsEqualTo('!');
     }
 
-    [Fact]
-    public void GetAtOrDefault_OutOfRange_ReturnsDefault()
+    [Test]
+    public async Task GetLastOrDefault_ShouldReturnLastChar()
     {
-        var result = CharHelper.GetAtOrDefault("abc", 5, '?');
-        Assert.Equal('?', result);
+        var result = CharHelper.GetLastOrDefault("xyz");
+        await Assert.That(result).IsEqualTo('z');
     }
 
-    [Fact]
-    public void ToLower_ToUpper_ShouldUseInvariantCulture()
+    [Test]
+    public async Task ToLower_ToUpper_ShouldUseInvariantCulture()
     {
         var lower = CharHelper.ToLower('A');
-        var upper = CharHelper.ToUpper('a');
-        Assert.Equal('a', lower);
-        Assert.Equal('A', upper);
+        var upper = CharHelper.ToUpper('ß');
+        await Assert.That(lower).IsEqualTo('a');
+        await Assert.That(upper).IsEqualTo(char.ToUpperInvariant('ß'));
     }
 }
