@@ -1,25 +1,27 @@
 using System;
-using Xunit;
+using TUnit.Assertions;
+using TUnit.Assertions.Extensions;
+using TUnit.Core;
 using DotNetBesties.Helpers;
 
 namespace DotNetBesties.Helpers.Tests;
 
 public class DoubleHelperTests
 {
-    [Fact]
-    public void ToOADate_RoundTrip()
+    [Test]
+    public async Task ToOADate_RoundTrip()
     {
         var dt = new DateTime(2024, 1, 2, 3, 4, 5, DateTimeKind.Utc);
         var oa = DoubleHelper.ToOADate(dt);
         var back = DateTime.FromOADate(oa);
-        Assert.Equal(dt, DateTime.SpecifyKind(back, DateTimeKind.Utc));
+        await Assert.That(DateTime.SpecifyKind(back, DateTimeKind.Utc)).IsEqualTo(dt);
     }
 
-    [Fact]
-    public void TotalMinutes_ShouldReturnExpected()
+    [Test]
+    public async Task TotalMinutes_ShouldReturnExpected()
     {
         var ts = new TimeSpan(1, 2, 0);
         var result = DoubleHelper.TotalMinutes(ts);
-        Assert.Equal(ts.TotalMinutes, result);
+        await Assert.That(result).IsEqualTo(ts.TotalMinutes);
     }
 }

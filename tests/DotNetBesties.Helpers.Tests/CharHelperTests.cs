@@ -1,21 +1,23 @@
-using Xunit;
+using TUnit.Assertions;
+using TUnit.Assertions.Extensions;
+using TUnit.Core;
 using DotNetBesties.Helpers;
 
 namespace DotNetBesties.Helpers.Tests;
 
 public class CharHelperTests
 {
-    [Fact]
-    public void GetFirstOrDefault_ShouldReturnFirstChar()
+    [Test]
+    public async Task GetFirstOrDefault_ShouldReturnFirstChar()
     {
         var result = CharHelper.GetFirstOrDefault("abc");
-        Assert.Equal('a', result);
+        await Assert.That(result).IsEqualTo('a');
     }
 
-    [Fact]
-    public void GetFirstOrDefault_Null_ReturnsDefault()
+    [Test]
+    public async Task GetFirstOrDefault_Null_ReturnsDefault()
     {
         var result = CharHelper.GetFirstOrDefault(null, '?');
-        Assert.Equal('?', result);
+        await Assert.That(result).IsEqualTo('?');
     }
 }

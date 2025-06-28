@@ -1,22 +1,24 @@
 using System;
-using Xunit;
+using TUnit.Assertions;
+using TUnit.Assertions.Extensions;
+using TUnit.Core;
 using DotNetBesties.Helpers;
 
 namespace DotNetBesties.Helpers.Tests;
 
 public class LongHelperTests
 {
-    [Fact]
-    public void Ticks_FromDateTime_ReturnsExpected()
+    [Test]
+    public async Task Ticks_FromDateTime_ReturnsExpected()
     {
         var dt = new DateTime(2024, 1, 1);
-        Assert.Equal(dt.Ticks, LongHelper.Ticks(dt));
+        await Assert.That(LongHelper.Ticks(dt)).IsEqualTo(dt.Ticks);
     }
 
-    [Fact]
-    public void ParseInvariant_ShouldParseString()
+    [Test]
+    public async Task ParseInvariant_ShouldParseString()
     {
         var result = LongHelper.ParseInvariant("42");
-        Assert.Equal(42L, result);
+        await Assert.That(result).IsEqualTo(42L);
     }
 }
