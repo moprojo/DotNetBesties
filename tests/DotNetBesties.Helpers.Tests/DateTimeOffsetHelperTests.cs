@@ -23,6 +23,14 @@ public class DateTimeOffsetHelperTests
     }
 
     [Fact]
+    public void Format_ShouldUseInvariantCulture()
+    {
+        var dto = new DateTimeOffset(2025, 1, 1, 8, 30, 0, TimeSpan.Zero);
+        var formatted = StringHelper.FromDateTimeOffset(dto, "yyyy-MM-ddTHH:mm:sszzz");
+        Assert.Equal("2025-01-01T08:30:00+00:00", formatted);
+    }
+
+    [Fact]
     public void ParseExactInvariantOrNull_Invalid_ReturnsNull()
     {
         var result = DateTimeOffsetHelper.ParseExactInvariantOrNull("bad", "O");
