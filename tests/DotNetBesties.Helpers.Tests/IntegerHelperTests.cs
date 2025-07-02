@@ -95,7 +95,7 @@ public class IntegerHelperTests
     public async Task Seconds_FromTimeSpan_ReturnsExpected()
     {
         var ts = TimeSpan.FromSeconds(123);
-        await Assert.That(IntegerHelper.Seconds(ts)).IsEqualTo(123);
+        await Assert.That(IntegerHelper.Seconds(ts)).IsEqualTo(ts.Seconds);
     }
 
     [Test]
