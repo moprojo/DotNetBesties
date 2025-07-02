@@ -85,6 +85,20 @@ public class IntegerHelperTests
     }
 
     [Test]
+    public async Task Days_FromTimeSpan_ReturnsExpected()
+    {
+        var ts = TimeSpan.FromDays(5);
+        await Assert.That(IntegerHelper.Days(ts)).IsEqualTo(5);
+    }
+
+    [Test]
+    public async Task Seconds_FromTimeSpan_ReturnsExpected()
+    {
+        var ts = TimeSpan.FromSeconds(123);
+        await Assert.That(IntegerHelper.Seconds(ts)).IsEqualTo(123);
+    }
+
+    [Test]
     public async Task IsoWeek_ShouldReturnExpectedWeek()
     {
         var date = new DateTime(2025, 1, 1); // 1 Jan 2025 is week 1

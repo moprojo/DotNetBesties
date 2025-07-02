@@ -1,3 +1,4 @@
+using System.Globalization;
 using TUnit.Assertions;
 using TUnit.Assertions.Extensions;
 using TUnit.Core;
@@ -7,6 +8,22 @@ namespace DotNetBesties.Helpers.Tests;
 
 public class CharHelperTests
 {
+    [Test]
+    public async Task ToLower_WithCustomCulture_ShouldConvertCorrectly()
+    {
+        var culture = new CultureInfo("tr-TR");
+        var lower = CharHelper.ToLower('I', culture);
+        await Assert.That(lower).IsEqualTo('ı');
+    }
+
+    [Test]
+    public async Task ToUpper_WithCustomCulture_ShouldConvertCorrectly()
+    {
+        var culture = new CultureInfo("tr-TR");
+        var upper = CharHelper.ToUpper('i', culture);
+        await Assert.That(upper).IsEqualTo('İ');
+    }
+
     [Test]
     public async Task GetFirstOrDefault_ShouldReturnFirstChar()
     {
