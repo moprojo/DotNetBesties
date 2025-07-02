@@ -1,7 +1,7 @@
 using System;
 using System.Globalization;
 
-namespace DotNetBesties.Helpers;
+namespace DotNetBesties.Helpers.Format;
 
 /// <summary>
 /// Helpers for operations that produce <see cref="int"/> results.

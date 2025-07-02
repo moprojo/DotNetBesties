@@ -1,7 +1,7 @@
 using System;
 using System.Globalization;
 
-namespace DotNetBesties.Helpers;
+namespace DotNetBesties.Helpers.Format;
 
 /// <summary>
 /// Helpers for operations that produce <see cref="bool"/> results.
@@ -52,7 +52,7 @@ public static class BoolHelper
 
     #region Long
     /// <summary>
-    /// Attempts to parse an <see cref="Int64"/> using invariant culture.
+    /// Attempts to parse an <see cref="long"/> using invariant culture.
     /// </summary>
     public static bool TryParseLongInvariant(string? input, out long result)
         => long.TryParse(input, NumberStyles.Integer, CultureInfo.InvariantCulture, out result);

@@ -3,9 +3,9 @@ using System.Globalization;
 using TUnit.Assertions;
 using TUnit.Assertions.Extensions;
 using TUnit.Core;
-using DotNetBesties.Helpers;
+using DotNetBesties.Helpers.Format;
 
-namespace DotNetBesties.Helpers.Tests;
+namespace DotNetBesties.Helpers.Tests.Format;
 
 public class BoolHelperTests
 {

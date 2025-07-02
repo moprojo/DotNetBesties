@@ -2,9 +2,9 @@ using System;
 using TUnit.Assertions;
 using TUnit.Assertions.Extensions;
 using TUnit.Core;
-using DotNetBesties.Helpers;
+using DotNetBesties.Helpers.Format;
 
-namespace DotNetBesties.Helpers.Tests;
+namespace DotNetBesties.Helpers.Tests.Format;
 
 public class TimeSpanHelperTests
 {
@@ -27,7 +27,7 @@ public class TimeSpanHelperTests
     [Test]
     public async Task Format_NullableNull_ReturnsNull()
     {
-        string? result = StringHelper.FromTimeSpan((TimeSpan?)null);
+        string? result = StringHelper.FromTimeSpan(null);
         await Assert.That(result).IsNull();
     }
 

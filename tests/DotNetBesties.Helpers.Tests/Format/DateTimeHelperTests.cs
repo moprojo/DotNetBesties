@@ -3,9 +3,9 @@ using System.Globalization;
 using TUnit.Assertions;
 using TUnit.Assertions.Extensions;
 using TUnit.Core;
-using DotNetBesties.Helpers;
+using DotNetBesties.Helpers.Format;
 
-namespace DotNetBesties.Helpers.Tests;
+namespace DotNetBesties.Helpers.Tests.Format;
 
 public class DateTimeHelperTests
 {
@@ -28,7 +28,7 @@ public class DateTimeHelperTests
     [Test]
     public async Task Format_NullableNull_ReturnsNull()
     {
-        string? result = StringHelper.FromDateTime((DateTime?)null);
+        string? result = StringHelper.FromDateTime(null);
         await Assert.That(result).IsNull();
     }
 

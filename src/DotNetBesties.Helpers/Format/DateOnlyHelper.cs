@@ -1,7 +1,7 @@
 using System;
 using System.Globalization;
 
-namespace DotNetBesties.Helpers;
+namespace DotNetBesties.Helpers.Format;
 
 /// <summary>
 /// Utility methods for working with <see cref="DateOnly"/> values.
@@ -49,7 +49,7 @@ public static class DateOnlyHelper
     /// Converts nullable Unix seconds to a nullable <see cref="DateOnly"/> in UTC.
     /// </summary>
     public static DateOnly? FromUnixTimeSeconds(long? seconds)
-        => seconds.HasValue ? FromUnixTimeSeconds(seconds.Value) : (DateOnly?)null;
+        => seconds.HasValue ? FromUnixTimeSeconds(seconds.Value) : null;
 
     /// <summary>
     /// Parses a string exactly using <see cref="CultureInfo.InvariantCulture"/>.
@@ -62,13 +62,13 @@ public static class DateOnlyHelper
     /// Attempts to parse a string exactly using invariant culture. Returns <c>null</c> if parsing fails.
     /// </summary>
     public static DateOnly? ParseExactInvariantOrNull(string? input, string format)
-        => DateOnly.TryParseExact(input, format, CultureInfo.InvariantCulture, DateTimeStyles.None, out var result) ? result : (DateOnly?)null;
+        => DateOnly.TryParseExact(input, format, CultureInfo.InvariantCulture, DateTimeStyles.None, out var result) ? result : null;
 
     /// <summary>
     /// Attempts to parse a string using any of the provided formats and invariant culture. Returns <c>null</c> on failure.
     /// </summary>
     public static DateOnly? ParseExactInvariantOrNull(string? input, string[] formats)
-        => DateOnly.TryParseExact(input, formats, CultureInfo.InvariantCulture, DateTimeStyles.None, out var result) ? result : (DateOnly?)null;
+        => DateOnly.TryParseExact(input, formats, CultureInfo.InvariantCulture, DateTimeStyles.None, out var result) ? result : null;
 
     #endregion
 }

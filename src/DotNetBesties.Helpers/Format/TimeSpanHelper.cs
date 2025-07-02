@@ -1,7 +1,7 @@
 using System;
 using System.Globalization;
 
-namespace DotNetBesties.Helpers;
+namespace DotNetBesties.Helpers.Format;
 
 /// <summary>
 /// Utility methods for working with <see cref="TimeSpan"/> values.
@@ -86,13 +86,13 @@ public static class TimeSpanHelper
     /// Attempts to parse the string exactly using invariant culture. Returns <c>null</c> if parsing fails.
     /// </summary>
     public static TimeSpan? ParseExactInvariantOrNull(string? input, string format)
-        => TimeSpan.TryParseExact(input, format, CultureInfo.InvariantCulture, out var result) ? result : (TimeSpan?)null;
+        => TimeSpan.TryParseExact(input, format, CultureInfo.InvariantCulture, out var result) ? result : null;
 
     /// <summary>
     /// Attempts to parse the string using any of the provided formats and invariant culture. Returns <c>null</c> on failure.
     /// </summary>
     public static TimeSpan? ParseExactInvariantOrNull(string? input, string[] formats)
-        => TimeSpan.TryParseExact(input, formats, CultureInfo.InvariantCulture, out var result) ? result : (TimeSpan?)null;
+        => TimeSpan.TryParseExact(input, formats, CultureInfo.InvariantCulture, out var result) ? result : null;
 
     /// <summary>
     /// Subtracts one <see cref="TimeSpan"/> from another.

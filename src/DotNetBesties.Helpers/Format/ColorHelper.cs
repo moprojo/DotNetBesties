@@ -1,7 +1,7 @@
 using System;
 using System.Drawing;
 
-namespace DotNetBesties.Helpers
+namespace DotNetBesties.Helpers.Format
 {
     public static class ColorHelper
     {

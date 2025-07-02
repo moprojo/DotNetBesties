@@ -1,11 +1,12 @@
-﻿using System;
+﻿using DotNetBesties.Helpers.Format;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DotNetBesties.Helpers.Tests
+namespace DotNetBesties.Helpers.Tests.Format
 {
     public class StringHelperTests
     {

@@ -2,9 +2,9 @@ using System;
 using System.Drawing;
 using TUnit.Assertions;
 using TUnit.Core;
-using DotNetBesties.Helpers;
+using DotNetBesties.Helpers.Format;
 
-namespace DotNetBesties.Helpers.Tests
+namespace DotNetBesties.Helpers.Tests.Format
 {
     public class ColorHelperTests
     {
@@ -40,9 +40,9 @@ namespace DotNetBesties.Helpers.Tests
         public async Task HexToRGB_ShouldReturnExpectedRGB()
         {
             var (r, g, b) = ColorHelper.HexToRGB("#FF0000");
-            await Assert.That((int)r).IsEqualTo(255);
-            await Assert.That((int)g).IsEqualTo(0);
-            await Assert.That((int)b).IsEqualTo(0);
+            await Assert.That(r).IsEqualTo(255);
+            await Assert.That(g).IsEqualTo(0);
+            await Assert.That(b).IsEqualTo(0);
         }
 
         [Test]
@@ -50,10 +50,10 @@ namespace DotNetBesties.Helpers.Tests
         {
             var color = Color.FromArgb(128, 255, 0, 0);
             var (a, r, g, b) = ColorHelper.ColorToARGB(color);
-            await Assert.That((int)a).IsEqualTo(128);
-            await Assert.That((int)r).IsEqualTo(255);
-            await Assert.That((int)g).IsEqualTo(0);
-            await Assert.That((int)b).IsEqualTo(0);
+            await Assert.That(a).IsEqualTo(128);
+            await Assert.That(r).IsEqualTo(255);
+            await Assert.That(g).IsEqualTo(0);
+            await Assert.That(b).IsEqualTo(0);
         }
     }
 }

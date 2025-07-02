@@ -3,7 +3,7 @@ using TUnit.Assertions;
 using TUnit.Assertions.Extensions;
 using TUnit.Core;
 using System.Globalization;
-using DotNetBesties.Helpers;
+using DotNetBesties.Helpers.Format;
 
 namespace DotNetBesties.Helpers.Tests;
 

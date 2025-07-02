@@ -2,7 +2,7 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace DotNetBesties.Helpers
+namespace DotNetBesties.Helpers.Format
 {
     public static class EncryptionHelper
     {

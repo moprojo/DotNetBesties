@@ -1,7 +1,7 @@
 using System;
 using System.Globalization;
 
-namespace DotNetBesties.Helpers;
+namespace DotNetBesties.Helpers.Format;
 
 /// <summary>
 /// Utility methods for working with <see cref="DateTimeOffset"/> values.
@@ -48,7 +48,7 @@ public static class DateTimeOffsetHelper
     /// Converts nullable Unix milliseconds to a nullable <see cref="DateTimeOffset"/> in UTC.
     /// </summary>
     public static DateTimeOffset? FromUnixTimeMilliseconds(long? milliseconds)
-        => milliseconds.HasValue ? DateTimeOffset.FromUnixTimeMilliseconds(milliseconds.Value) : (DateTimeOffset?)null;
+        => milliseconds.HasValue ? DateTimeOffset.FromUnixTimeMilliseconds(milliseconds.Value) : null;
 
     /// <summary>
     /// Converts Unix seconds to a <see cref="DateTimeOffset"/> in UTC.
@@ -60,7 +60,7 @@ public static class DateTimeOffsetHelper
     /// Converts nullable Unix seconds to a nullable <see cref="DateTimeOffset"/> in UTC.
     /// </summary>
     public static DateTimeOffset? FromUnixTimeSeconds(long? seconds)
-        => seconds.HasValue ? DateTimeOffset.FromUnixTimeSeconds(seconds.Value) : (DateTimeOffset?)null;
+        => seconds.HasValue ? DateTimeOffset.FromUnixTimeSeconds(seconds.Value) : null;
 
     /// <summary>
     /// Parses a string exactly using <see cref="CultureInfo.InvariantCulture"/>.
@@ -72,13 +72,13 @@ public static class DateTimeOffsetHelper
     /// Attempts to parse a string using invariant culture and the specified format. Returns <c>null</c> on failure.
     /// </summary>
     public static DateTimeOffset? ParseExactInvariantOrNull(string? input, string format, DateTimeStyles styles = DateTimeStyles.None)
-        => DateTimeOffset.TryParseExact(input, format, CultureInfo.InvariantCulture, styles, out var result) ? result : (DateTimeOffset?)null;
+        => DateTimeOffset.TryParseExact(input, format, CultureInfo.InvariantCulture, styles, out var result) ? result : null;
 
     /// <summary>
     /// Attempts to parse a string using any of the provided formats and invariant culture. Returns <c>null</c> if none match.
     /// </summary>
     public static DateTimeOffset? ParseExactInvariantOrNull(string? input, string[] formats, DateTimeStyles styles = DateTimeStyles.None)
-        => DateTimeOffset.TryParseExact(input, formats, CultureInfo.InvariantCulture, styles, out var result) ? result : (DateTimeOffset?)null;
+        => DateTimeOffset.TryParseExact(input, formats, CultureInfo.InvariantCulture, styles, out var result) ? result : null;
 
     /// <summary>
     /// Adjusts the <see cref="DateTimeOffset"/> to the specified offset while keeping the same UTC time.

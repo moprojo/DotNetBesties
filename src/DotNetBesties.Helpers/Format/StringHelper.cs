@@ -2,7 +2,7 @@ using System;
 using System.Drawing;
 using System.Globalization;
 
-namespace DotNetBesties.Helpers;
+namespace DotNetBesties.Helpers.Format;
 
 /// <summary>
 /// Conversion helpers that produce <see cref="string"/> results.

@@ -1,7 +1,7 @@
 using System;
 using System.Globalization;
 
-namespace DotNetBesties.Helpers;
+namespace DotNetBesties.Helpers.Format;
 
 /// <summary>
 /// Utility methods for working with <see cref="DateTime"/> values.
@@ -36,7 +36,7 @@ public static class DateTimeHelper
     /// Converts nullable Unix milliseconds to a nullable <see cref="DateTime"/> in UTC.
     /// </summary>
     public static DateTime? FromUnixTimeMilliseconds(long? milliseconds)
-        => milliseconds.HasValue ? FromUnixTimeMilliseconds(milliseconds.Value) : (DateTime?)null;
+        => milliseconds.HasValue ? FromUnixTimeMilliseconds(milliseconds.Value) : null;
 
     /// <summary>
     /// Converts Unix seconds to a <see cref="DateTime"/> in UTC.
@@ -48,7 +48,7 @@ public static class DateTimeHelper
     /// Converts nullable Unix seconds to a nullable <see cref="DateTime"/> in UTC.
     /// </summary>
     public static DateTime? FromUnixTimeSeconds(long? seconds)
-        => seconds.HasValue ? FromUnixTimeSeconds(seconds.Value) : (DateTime?)null;
+        => seconds.HasValue ? FromUnixTimeSeconds(seconds.Value) : null;
 
     /// <summary>
     /// Gets the ISO 8601 week number for the specified date.
@@ -67,14 +67,14 @@ public static class DateTimeHelper
     /// Returns <c>null</c> if parsing fails.
     /// </summary>
     public static DateTime? ParseExactInvariantOrNull(string? input, string format, DateTimeStyles styles = DateTimeStyles.None)
-        => DateTime.TryParseExact(input, format, CultureInfo.InvariantCulture, styles, out var result) ? result : (DateTime?)null;
+        => DateTime.TryParseExact(input, format, CultureInfo.InvariantCulture, styles, out var result) ? result : null;
 
     /// <summary>
     /// Attempts to parse a string using any of the provided formats and invariant culture.
     /// Returns <c>null</c> if none match.
     /// </summary>
     public static DateTime? ParseExactInvariantOrNull(string? input, string[] formats, DateTimeStyles styles = DateTimeStyles.None)
-        => DateTime.TryParseExact(input, formats, CultureInfo.InvariantCulture, styles, out var result) ? result : (DateTime?)null;
+        => DateTime.TryParseExact(input, formats, CultureInfo.InvariantCulture, styles, out var result) ? result : null;
 
     /// <summary>
     /// Returns a new instance of <see cref="DateTime"/> with the specified <see cref="DateTimeKind"/>.
@@ -95,7 +95,7 @@ public static class DateTimeHelper
         => value.Kind == DateTimeKind.Utc ? value : value.ToUniversalTime();
 
     public static DateTime? ToUniversalTime(DateTime? value)
-        => value.HasValue ? ToUniversalTime(value.Value) : (DateTime?)null;
+        => value.HasValue ? ToUniversalTime(value.Value) : null;
 
     #endregion
 }
