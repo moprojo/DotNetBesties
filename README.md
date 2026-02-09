@@ -270,8 +270,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## ?? Support
 
-- ?? **Issues**: [GitHub Issues](https://github.com/yourusername/DotNetBesties.Helpers/issues)
-- ?? **Discussions**: [GitHub Discussions](https://github.com/yourusername/DotNetBesties.Helpers/discussions)
+- ?? **Issues**: [GitHub Issues](https://github.com/moprojo/DotNetBesties.Helpers/issues)
+- ?? **Discussions**: [GitHub Discussions](https://github.com/moprojo/DotNetBesties.Helpers/discussions)
 - ?? **Email**: info@moprojo.de
 
 ## ??? Roadmap
@@ -284,9 +284,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## ?? Stats
 
-![GitHub stars](https://img.shields.io/github/stars/yourusername/DotNetBesties.Helpers?style=social)
-![GitHub forks](https://img.shields.io/github/forks/yourusername/DotNetBesties.Helpers?style=social)
-![GitHub watchers](https://img.shields.io/github/watchers/yourusername/DotNetBesties.Helpers?style=social)
+![GitHub stars](https://img.shields.io/github/stars/moprojo/DotNetBesties.Helpers?style=social)
+![GitHub forks](https://img.shields.io/github/forks/moprojo/DotNetBesties.Helpers?style=social)
+![GitHub watchers](https://img.shields.io/github/watchers/moprojo/DotNetBesties.Helpers?style=social)
 
 ---
 
