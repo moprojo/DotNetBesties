@@ -54,3 +54,5 @@ CodeCoverage/
 TestResult.xml
 nunit-*.xml
 DotNetBesties.sln.DotSettings.user
+
+*.secret
