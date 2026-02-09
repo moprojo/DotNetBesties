@@ -284,9 +284,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📊 Stats
 
-![GitHub stars](https://img.shields.io/github/stars/moprojo/DotNetBesties.Helpers?style=social)
-![GitHub forks](https://img.shields.io/github/forks/moprojo/DotNetBesties.Helpers?style=social)
-![GitHub watchers](https://img.shields.io/github/watchers/moprojo/DotNetBesties.Helpers?style=social)
+![GitHub stars](https://img.shields.io/github/stars/moprojo/DotNetBesties?style=social)
+![GitHub forks](https://img.shields.io/github/forks/moprojo/DotNetBesties?style=social)
+![GitHub watchers](https://img.shields.io/github/watchers/moprojo/DotNetBesties?style=social)
 
 ---
 

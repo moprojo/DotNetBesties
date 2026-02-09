@@ -10,7 +10,7 @@
 
     <!-- NuGet Package Settings -->
     <PackageId>DotNetBesties.Helpers</PackageId>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Authors>Denny Straßburg</Authors>
     <Company>Moprojo</Company>
     <Product>DotNetBesties.Helpers</Product>
