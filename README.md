@@ -1,10 +1,10 @@
 # ✨ DotNetBesties.Helpers
 
-[![.NET](https://img.shields.io/badge/.NET-9.0-512BD4?logo=dotnet)](https://dotnet.microsoft.com/)
+[![.NET](https://img.shields.io/badge/.NET-9.0%20%7C%2010.0-512BD4?logo=dotnet)](https://dotnet.microsoft.com/)
 [![C#](https://img.shields.io/badge/C%23-13.0-239120?logo=csharp)](https://docs.microsoft.com/en-us/dotnet/csharp/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-A comprehensive collection of powerful helper classes and extension methods for .NET 9 applications. This library provides productivity-boosting utilities for common development tasks including string manipulation, validation, formatting, and more.
+A comprehensive collection of powerful helper classes and extension methods for .NET 9+ and .NET 10 applications. This library provides productivity-boosting utilities for common development tasks including string manipulation, validation, formatting, and more.
 
 ## 🚀 Features
 

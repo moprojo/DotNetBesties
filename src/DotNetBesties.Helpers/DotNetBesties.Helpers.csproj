@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks Condition="'$(Net10Available)' == 'true'">net10.0;net9.0</TargetFrameworks>
-    <TargetFramework Condition="'$(Net10Available)' != 'true'">net9.0</TargetFramework>
+    <TargetFrameworks>net10.0;net9.0</TargetFrameworks>
     <LangVersion>13.0</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
@@ -10,18 +9,18 @@
 
     <!-- NuGet Package Settings -->
     <PackageId>DotNetBesties.Helpers</PackageId>
-    <Version>1.0.1</Version>
+    <Version>1.1.0</Version>
     <Authors>Denny Straßburg</Authors>
     <Company>Moprojo</Company>
     <Product>DotNetBesties.Helpers</Product>
-    <Description>A comprehensive collection of helper classes and extension methods for .NET 10+ applications. Includes string manipulation, validation, formatting, and more.</Description>
+    <Description>A comprehensive collection of helper classes and extension methods for .NET 9+ and .NET 10 applications. Includes string manipulation, validation, formatting, and more.</Description>
     <Copyright>Copyright © 2026 Moprojo</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/moprojo/DotNetBesties.Helpers</PackageProjectUrl>
     <RepositoryUrl>https://github.com/moprojo/DotNetBesties.Helpers</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>helpers;extensions;utilities;validation;formatting;dotnet;csharp;net10</PackageTags>
-    <PackageReleaseNotes>Version 1.0.0: Migrated to .NET 10 with full .NET 9 compatibility. All 1531 tests passing.</PackageReleaseNotes>
+    <PackageTags>helpers;extensions;utilities;validation;formatting;dotnet;csharp;net10;net9</PackageTags>
+    <PackageReleaseNotes>Version 1.1.0: Multi-targeting support for .NET 9 and .NET 10.</PackageReleaseNotes>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     
     <!-- Documentation -->

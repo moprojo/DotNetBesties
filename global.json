@@ -1,10 +1,9 @@
 {
   "sdk": {
-    "version": "9.0.100",
-    "rollForward": "latestFeature",
+    "rollForward": "latestMajor",
     "allowPrerelease": true
   },
   "msbuild-sdks": {
-    "note": "This project targets .NET 10.0. To build with .NET 10 SDK, update the SDK version above to 10.0.100 when available."
+    "note": "This project targets .NET 9.0 and .NET 10.0 with multi-targeting support."
   }
 }
