@@ -6,8 +6,81 @@ namespace DotNetBesties.Helpers.Format;
 /// <summary>
 /// Helpers for operations that produce <see cref="int"/> results.
 /// </summary>
-public static class IntegerHelper
+public static class IntHelper
 {
+    #region Mathematical Operations
+
+    /// <summary>
+    /// Determines whether the integer is even.
+    /// </summary>
+    /// <param name="value">The integer to check.</param>
+    /// <returns><c>true</c> if the value is even; otherwise, <c>false</c>.</returns>
+    public static bool IsEven(int value)
+        => (value & 1) == 0;
+
+    /// <summary>
+    /// Determines whether the integer is odd.
+    /// </summary>
+    /// <param name="value">The integer to check.</param>
+    /// <returns><c>true</c> if the value is odd; otherwise, <c>false</c>.</returns>
+    public static bool IsOdd(int value)
+        => (value & 1) != 0;
+
+    /// <summary>
+    /// Determines whether the integer is a prime number.
+    /// </summary>
+    /// <param name="value">The integer to check.</param>
+    /// <returns><c>true</c> if the value is prime; otherwise, <c>false</c>.</returns>
+    public static bool IsPrime(int value)
+    {
+        if (value <= 1)
+            return false;
+
+        if (value == 2)
+            return true;
+
+        if (value % 2 == 0)
+            return false;
+
+        var boundary = (int)Math.Floor(Math.Sqrt(value));
+
+        for (int i = 3; i <= boundary; i += 2)
+        {
+            if (value % i == 0)
+                return false;
+        }
+
+        return true;
+    }
+
+    /// <summary>
+    /// Clamps the value between a minimum and maximum value.
+    /// </summary>
+    /// <param name="value">The value to clamp.</param>
+    /// <param name="min">The minimum value.</param>
+    /// <param name="max">The maximum value.</param>
+    /// <returns>The clamped value.</returns>
+    public static int Clamp(int value, int min, int max)
+        => Math.Clamp(value, min, max);
+
+    /// <summary>
+    /// Gets the absolute value of the integer.
+    /// </summary>
+    /// <param name="value">The integer value.</param>
+    /// <returns>The absolute value.</returns>
+    public static int Abs(int value)
+        => Math.Abs(value);
+
+    /// <summary>
+    /// Returns the sign of the integer (-1, 0, or 1).
+    /// </summary>
+    /// <param name="value">The integer value.</param>
+    /// <returns>-1 if negative, 0 if zero, 1 if positive.</returns>
+    public static int Sign(int value)
+        => Math.Sign(value);
+
+    #endregion
+
     #region DateOnly
     /// <summary>
     /// Gets the day component of the specified <see cref="DateOnly"/>.

@@ -1,9 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <!-- Use net10.0 when .NET 10 SDK is available, otherwise fall back to net9.0 -->
+    <TargetFrameworks Condition="'$(Net10Available)' == 'true'">net10.0;net9.0</TargetFrameworks>
+    <TargetFramework Condition="'$(Net10Available)' != 'true'">net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <LangVersion>13.0</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <NoWarn>$(NoWarn);CS8981</NoWarn>
   </PropertyGroup>
 
 </Project>

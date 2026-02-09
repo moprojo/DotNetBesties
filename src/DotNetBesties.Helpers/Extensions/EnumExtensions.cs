@@ -1,31 +1,58 @@
 using System;
+using System.ComponentModel;
+using System.Reflection;
 
-namespace DotNetBesties.Helpers.Extensions
+namespace DotNetBesties.Helpers.Extensions;
+
+/// <summary>
+/// Extension methods for <see cref="Enum"/> types.
+/// </summary>
+public static class EnumExtensions
 {
-    public static class EnumExtensions
-    {
-        public static bool IsDefined<TEnum>(this TEnum value) where TEnum : struct, Enum
-        {
-            return Enum.IsDefined(typeof(TEnum), value);
-        }
+    /// <summary>
+    /// Gets the name of the enum value.
+    /// </summary>
+    /// <typeparam name="TEnum">The type of the enum.</typeparam>
+    /// <param name="value">The enum value.</param>
+    /// <returns>The name of the enum value, or null if no name was found.</returns>
+    public static string? GetEnumName<TEnum>(this TEnum value) where TEnum : struct, Enum
+        => Format.EnumHelper.GetEnumName(value);
 
-        public static string ToDescription<TEnum>(this TEnum value) where TEnum : struct, Enum
-        {
-            var fieldInfo = typeof(TEnum).GetField(value.ToString());
-            if(fieldInfo == null) return value.ToString();
+    /// <summary>
+    /// Checks if the given enum value is defined in the enum type.
+    /// </summary>
+    /// <typeparam name="TEnum">The type of the enum.</typeparam>
+    /// <param name="value">The enum value.</param>
+    /// <returns><c>true</c> if the value is defined; otherwise, <c>false</c>.</returns>
+    public static bool IsDefined<TEnum>(this TEnum value) where TEnum : struct, Enum
+        => Format.EnumHelper.IsDefined(value);
 
-            var attributes = fieldInfo.GetCustomAttributes(typeof(System.ComponentModel.DescriptionAttribute), false);
-            if(attributes.Length > 0)
-            {
-                return ((System.ComponentModel.DescriptionAttribute)attributes[0]).Description;
-            }
+    /// <summary>
+    /// Retrieves the description attribute of the enum value, if available.
+    /// Otherwise, returns the name of the enum value.
+    /// </summary>
+    /// <typeparam name="TEnum">The type of the enum.</typeparam>
+    /// <param name="value">The enum value.</param>
+    /// <returns>The description or string representation of the enum value.</returns>
+    public static string ToDescription<TEnum>(this TEnum value) where TEnum : struct, Enum
+        => Format.EnumHelper.ToDescription(value);
 
-            return value.ToString();
-        }
+    /// <summary>
+    /// Gets the underlying integer value of the enum.
+    /// </summary>
+    /// <typeparam name="TEnum">The type of the enum.</typeparam>
+    /// <param name="value">The enum value.</param>
+    /// <returns>The underlying integer value.</returns>
+    public static int ToInt<TEnum>(this TEnum value) where TEnum : struct, Enum
+        => Format.EnumHelper.ToInt(value);
 
-        public static string GetEnumName<TEnum>(TEnum value) where TEnum : Enum
-        {
-            return Enum.GetName(typeof(TEnum), value);
-        }
-    }
+    /// <summary>
+    /// Checks if the enum has the specified flag set.
+    /// </summary>
+    /// <typeparam name="TEnum">The type of the enum.</typeparam>
+    /// <param name="value">The enum value.</param>
+    /// <param name="flag">The flag to check.</param>
+    /// <returns><c>true</c> if the flag is set; otherwise, <c>false</c>.</returns>
+    public static bool HasFlagFast<TEnum>(this TEnum value, TEnum flag) where TEnum : struct, Enum
+        => Format.EnumHelper.HasFlag(value, flag);
 }

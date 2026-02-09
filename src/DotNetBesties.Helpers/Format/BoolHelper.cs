@@ -8,6 +8,108 @@ namespace DotNetBesties.Helpers.Format;
 /// </summary>
 public static class BoolHelper
 {
+    #region Conversion
+
+    /// <summary>
+    /// Converts a boolean value to "Yes" or "No" string.
+    /// </summary>
+    /// <param name="value">The boolean value to convert.</param>
+    /// <returns>"Yes" if true, "No" if false.</returns>
+    public static string ToYesNo(bool value)
+        => value ? "Yes" : "No";
+
+    /// <summary>
+    /// Converts a boolean value to an integer (1 for true, 0 for false).
+    /// </summary>
+    /// <param name="value">The boolean value to convert.</param>
+    /// <returns>1 if true, 0 if false.</returns>
+    public static int ToInt(bool value)
+        => value ? 1 : 0;
+
+    #endregion
+
+    #region Parsing
+
+    /// <summary>
+    /// Attempts to parse a string to a boolean value.
+    /// Accepts "true"/"false", "1"/"0", "yes"/"no" (case-insensitive).
+    /// </summary>
+    /// <param name="value">The string to parse.</param>
+    /// <param name="result">The parsed boolean value if successful.</param>
+    /// <returns><c>true</c> if parsing succeeded; otherwise, <c>false</c>.</returns>
+    public static bool TryParse(string? value, out bool result)
+    {
+        result = false;
+
+        if (string.IsNullOrWhiteSpace(value))
+            return false;
+
+        var trimmed = value.Trim();
+
+        // Standard boolean parsing
+        if (bool.TryParse(trimmed, out result))
+            return true;
+
+        // Check for numeric values
+        if (trimmed == "1")
+        {
+            result = true;
+            return true;
+        }
+
+        if (trimmed == "0")
+        {
+            result = false;
+            return true;
+        }
+        
+        // Check for yes/no (case-insensitive)
+        if (trimmed.Equals("yes", StringComparison.OrdinalIgnoreCase))
+        {
+            result = true;
+            return true;
+        }
+
+        if (trimmed.Equals("no", StringComparison.OrdinalIgnoreCase))
+        {
+            result = false;
+            return true;
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// Parses a string to a boolean value.
+    /// Accepts "true"/"false", "1"/"0", "yes"/"no" (case-insensitive).
+    /// </summary>
+    /// <param name="value">The string to parse.</param>
+    /// <returns>The parsed boolean value.</returns>
+    /// <exception cref="ArgumentNullException">Thrown when value is null.</exception>
+    /// <exception cref="FormatException">Thrown when the value cannot be parsed.</exception>
+    public static bool Parse(string value)
+    {
+        if (value == null)
+            throw new ArgumentNullException(nameof(value));
+
+        if (TryParse(value, out bool result))
+            return result;
+
+        throw new FormatException($"String '{value}' was not recognized as a valid Boolean.");
+    }
+
+    /// <summary>
+    /// Parses a string to a boolean value with a default value if parsing fails.
+    /// Accepts "true"/"false", "1"/"0", "yes"/"no" (case-insensitive).
+    /// </summary>
+    /// <param name="value">The string to parse.</param>
+    /// <param name="defaultValue">The default value to return if parsing fails.</param>
+    /// <returns>The parsed boolean value or the default value.</returns>
+    public static bool ParseOrDefault(string? value, bool defaultValue = false)
+        => TryParse(value, out bool result) ? result : defaultValue;
+
+    #endregion
+
     #region DateOnly
     /// <summary>
     /// Attempts to parse a <see cref="DateOnly"/> using the specified format and invariant culture.

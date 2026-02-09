@@ -1,20 +1,27 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <!-- Use net10.0 when .NET 10 SDK is available, otherwise fall back to net9.0 -->
+    <TargetFrameworks Condition="'$(Net10Available)' == 'true'">net10.0;net9.0</TargetFrameworks>
+    <TargetFramework Condition="'$(Net10Available)' != 'true'">net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <LangVersion>13.0</LangVersion>
 
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <NoWarn>$(NoWarn);CS8981</NoWarn>
+  </PropertyGroup>
+
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.0" />
-    <PackageReference Include="TUnit" Version="0.25.21" />
-    <PackageReference Include="TUnit.Engine" Version="0.25.21" />
-    <PackageReference Include="TUnit.Assertions" Version="0.25.21" />
-    <PackageReference Include="coverlet.collector" Version="6.0.0">
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
+    <PackageReference Include="TUnit" Version="1.13.11" />
+    <PackageReference Include="TUnit.Engine" Version="1.13.11" />
+    <PackageReference Include="TUnit.Assertions" Version="1.13.11" />
+    <PackageReference Include="coverlet.collector" Version="6.0.4">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>

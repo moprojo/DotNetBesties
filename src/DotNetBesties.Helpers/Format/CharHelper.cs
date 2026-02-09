@@ -20,6 +20,62 @@ public static class CharHelper
     /// </summary>
     public static char ToUpper(char value, CultureInfo? culture = null)
         => char.ToUpper(value, culture ?? CultureInfo.InvariantCulture);
+
+    /// <summary>
+    /// Determines whether the character is a vowel (a, e, i, o, u - case insensitive).
+    /// </summary>
+    /// <param name="value">The character to check.</param>
+    /// <returns><c>true</c> if the character is a vowel; otherwise, <c>false</c>.</returns>
+    public static bool IsVowel(char value)
+    {
+        var lower = char.ToLowerInvariant(value);
+        return lower == 'a' || lower == 'e' || lower == 'i' || lower == 'o' || lower == 'u';
+    }
+
+    /// <summary>
+    /// Determines whether the character is a consonant (a letter that is not a vowel).
+    /// </summary>
+    /// <param name="value">The character to check.</param>
+    /// <returns><c>true</c> if the character is a consonant; otherwise, <c>false</c>.</returns>
+    public static bool IsConsonant(char value)
+        => char.IsLetter(value) && !IsVowel(value);
+
+    /// <summary>
+    /// Repeats the character the specified number of times.
+    /// </summary>
+    /// <param name="value">The character to repeat.</param>
+    /// <param name="count">The number of times to repeat the character.</param>
+    /// <returns>A string containing the repeated character.</returns>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when count is negative.</exception>
+    public static string Repeat(char value, int count)
+    {
+        if (count < 0)
+            throw new ArgumentOutOfRangeException(nameof(count), "Count cannot be negative.");
+        
+        return new string(value, count);
+    }
+
+    /// <summary>
+    /// Determines whether the character is in the specified range (inclusive).
+    /// </summary>
+    /// <param name="value">The character to check.</param>
+    /// <param name="start">The start of the range (inclusive).</param>
+    /// <param name="end">The end of the range (inclusive).</param>
+    /// <returns><c>true</c> if the character is within the range; otherwise, <c>false</c>.</returns>
+    public static bool IsInRange(char value, char start, char end)
+        => value >= start && value <= end;
+
+    /// <summary>
+    /// Determines whether the character is any of the specified characters.
+    /// </summary>
+    /// <param name="value">The character to check.</param>
+    /// <param name="chars">The characters to compare against.</param>
+    /// <returns><c>true</c> if the character matches any of the specified characters; otherwise, <c>false</c>.</returns>
+    public static bool IsAnyOf(char value, params char[] chars)
+    {
+        ArgumentNullException.ThrowIfNull(chars);
+        return chars.Contains(value);
+    }
     #endregion
 
     #region String

@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 
 namespace DotNetBesties.Helpers.Format;
 
@@ -99,6 +101,156 @@ public static class TimeSpanHelper
     /// </summary>
     public static TimeSpan Subtract(TimeSpan left, TimeSpan right)
         => left - right;
+
+    #endregion
+
+    #region Queries
+
+    /// <summary>
+    /// Determines whether the TimeSpan is zero.
+    /// </summary>
+    /// <param name="value">The TimeSpan value.</param>
+    /// <returns>True if the TimeSpan is zero; otherwise, false.</returns>
+    public static bool IsZero(TimeSpan value)
+        => value == TimeSpan.Zero;
+
+    /// <summary>
+    /// Determines whether the TimeSpan is positive.
+    /// </summary>
+    /// <param name="value">The TimeSpan value.</param>
+    /// <returns>True if the TimeSpan is positive; otherwise, false.</returns>
+    public static bool IsPositive(TimeSpan value)
+        => value > TimeSpan.Zero;
+
+    /// <summary>
+    /// Determines whether the TimeSpan is negative.
+    /// </summary>
+    /// <param name="value">The TimeSpan value.</param>
+    /// <returns>True if the TimeSpan is negative; otherwise, false.</returns>
+    public static bool IsNegative(TimeSpan value)
+        => value < TimeSpan.Zero;
+
+    #endregion
+
+    #region Formatting
+
+    /// <summary>
+    /// Converts the TimeSpan to a human-readable string (e.g., "2 days, 3 hours").
+    /// </summary>
+    /// <param name="value">The TimeSpan value.</param>
+    /// <param name="precision">The number of components to include (default is 2).</param>
+    /// <returns>A human-readable string representation.</returns>
+    public static string ToHumanReadable(TimeSpan value, int precision = 2)
+    {
+        if (value == TimeSpan.Zero)
+            return "0 seconds";
+
+        var isNegative = value < TimeSpan.Zero;
+        value = Duration(value);
+
+        var parts = new List<string>();
+
+        if (value.Days > 0)
+            parts.Add($"{value.Days} day{(value.Days == 1 ? "" : "s")}");
+        
+        if (value.Hours > 0)
+            parts.Add($"{value.Hours} hour{(value.Hours == 1 ? "" : "s")}");
+        
+        if (value.Minutes > 0)
+            parts.Add($"{value.Minutes} minute{(value.Minutes == 1 ? "" : "s")}");
+        
+        if (value.Seconds > 0)
+            parts.Add($"{value.Seconds} second{(value.Seconds == 1 ? "" : "s")}");
+        
+        if (parts.Count == 0 && value.Milliseconds > 0)
+            parts.Add($"{value.Milliseconds} millisecond{(value.Milliseconds == 1 ? "" : "s")}");
+
+        var result = string.Join(", ", parts.Take(precision));
+        return isNegative ? $"-{result}" : result;
+    }
+
+    /// <summary>
+    /// Converts the TimeSpan to a compact string (e.g., "2d 3h 15m").
+    /// </summary>
+    /// <param name="value">The TimeSpan value.</param>
+    /// <returns>A compact string representation.</returns>
+    public static string ToCompactString(TimeSpan value)
+    {
+        if (value == TimeSpan.Zero)
+            return "0s";
+
+        var isNegative = value < TimeSpan.Zero;
+        value = Duration(value);
+
+        var parts = new List<string>();
+
+        if (value.Days > 0)
+            parts.Add($"{value.Days}d");
+        
+        if (value.Hours > 0)
+            parts.Add($"{value.Hours}h");
+        
+        if (value.Minutes > 0)
+            parts.Add($"{value.Minutes}m");
+        
+        if (value.Seconds > 0)
+            parts.Add($"{value.Seconds}s");
+        
+        if (parts.Count == 0 && value.Milliseconds > 0)
+            parts.Add($"{value.Milliseconds}ms");
+
+        var result = string.Join(" ", parts);
+        return isNegative ? $"-{result}" : result;
+    }
+
+    #endregion
+
+    #region Rounding
+
+    /// <summary>
+    /// Rounds the TimeSpan to the nearest specified interval.
+    /// </summary>
+    /// <param name="value">The TimeSpan to round.</param>
+    /// <param name="interval">The rounding interval.</param>
+    /// <returns>The rounded TimeSpan.</returns>
+    public static TimeSpan Round(TimeSpan value, TimeSpan interval)
+    {
+        if (interval == TimeSpan.Zero)
+            throw new ArgumentException("Interval cannot be zero.", nameof(interval));
+
+        var ticks = (long)Math.Round((double)value.Ticks / interval.Ticks) * interval.Ticks;
+        return TimeSpan.FromTicks(ticks);
+    }
+
+    /// <summary>
+    /// Rounds the TimeSpan up to the nearest specified interval.
+    /// </summary>
+    /// <param name="value">The TimeSpan to round up.</param>
+    /// <param name="interval">The rounding interval.</param>
+    /// <returns>The rounded up TimeSpan.</returns>
+    public static TimeSpan Ceiling(TimeSpan value, TimeSpan interval)
+    {
+        if (interval == TimeSpan.Zero)
+            throw new ArgumentException("Interval cannot be zero.", nameof(interval));
+
+        var ticks = (long)Math.Ceiling((double)value.Ticks / interval.Ticks) * interval.Ticks;
+        return TimeSpan.FromTicks(ticks);
+    }
+
+    /// <summary>
+    /// Rounds the TimeSpan down to the nearest specified interval.
+    /// </summary>
+    /// <param name="value">The TimeSpan to round down.</param>
+    /// <param name="interval">The rounding interval.</param>
+    /// <returns>The rounded down TimeSpan.</returns>
+    public static TimeSpan Floor(TimeSpan value, TimeSpan interval)
+    {
+        if (interval == TimeSpan.Zero)
+            throw new ArgumentException("Interval cannot be zero.", nameof(interval));
+
+        var ticks = (long)Math.Floor((double)value.Ticks / interval.Ticks) * interval.Ticks;
+        return TimeSpan.FromTicks(ticks);
+    }
 
     #endregion
 }

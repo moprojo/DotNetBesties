@@ -28,6 +28,25 @@ public static class DateOnlyHelper
         => value.AddYears(years);
 
     /// <summary>
+    /// Converts a <see cref="DateOnly"/> to a <see cref="DateTime"/> using the specified <see cref="TimeOnly"/>.
+    /// </summary>
+    /// <param name="value">The date value.</param>
+    /// <param name="time">The time component.</param>
+    /// <returns>A <see cref="DateTime"/> combining the date and time.</returns>
+    public static DateTime ToDateTime(DateOnly value, TimeOnly time)
+        => value.ToDateTime(time, DateTimeKind.Unspecified);
+
+    /// <summary>
+    /// Converts a <see cref="DateOnly"/> to a <see cref="DateTime"/> using the specified <see cref="TimeOnly"/> and <see cref="DateTimeKind"/>.
+    /// </summary>
+    /// <param name="value">The date value.</param>
+    /// <param name="time">The time component.</param>
+    /// <param name="kind">The kind of date and time.</param>
+    /// <returns>A <see cref="DateTime"/> combining the date and time.</returns>
+    public static DateTime ToDateTime(DateOnly value, TimeOnly time, DateTimeKind kind)
+        => value.ToDateTime(time, kind);
+
+    /// <summary>
     /// Creates a <see cref="DateOnly"/> from a <see cref="DateTime"/> instance.
     /// </summary>
     public static DateOnly FromDateTime(DateTime dateTime)
@@ -69,6 +88,18 @@ public static class DateOnlyHelper
     /// </summary>
     public static DateOnly? ParseExactInvariantOrNull(string? input, string[] formats)
         => DateOnly.TryParseExact(input, formats, CultureInfo.InvariantCulture, DateTimeStyles.None, out var result) ? result : null;
+
+    /// <summary>
+    /// Converts a <see cref="DateOnly"/> to Unix time in seconds (UTC).
+    /// </summary>
+    public static long ToUnixTimeSeconds(DateOnly value)
+        => new DateTimeOffset(value.ToDateTime(TimeOnly.MinValue, DateTimeKind.Utc)).ToUnixTimeSeconds();
+
+    /// <summary>
+    /// Converts a nullable <see cref="DateOnly"/> to Unix time in seconds (UTC).
+    /// </summary>
+    public static long? ToUnixTimeSeconds(DateOnly? value)
+        => value.HasValue ? ToUnixTimeSeconds(value.Value) : null;
 
     #endregion
 }
