@@ -1,5 +1,11 @@
 # ✨ DotNetBesties.Helpers
 
+> **Important Note**: This library is now published on NuGet as **[DotNetBesties](https://www.nuget.org/packages/DotNetBesties)**.
+Active development continues in this repository.
+Please check the NuGet package for the latest stable version and updates.
+
+----------------------------------------------------------
+
 [![.NET](https://img.shields.io/badge/.NET-9.0%20%7C%2010.0-512BD4?logo=dotnet)](https://dotnet.microsoft.com/)
 [![C#](https://img.shields.io/badge/C%23-13.0-239120?logo=csharp)](https://docs.microsoft.com/en-us/dotnet/csharp/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
@@ -270,8 +276,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 💬 Support
 
-- 🐛 **Issues**: [GitHub Issues](https://github.com/moprojo/DotNetBesties.Helpers/issues)
-- 💡 **Discussions**: [GitHub Discussions](https://github.com/moprojo/DotNetBesties.Helpers/discussions)
+- 🐛 **Issues**: [GitHub Issues](https://github.com/moprojo/DotNetBesties/issues)
+- 💡 **Discussions**: [GitHub Discussions](https://github.com/moprojo/DotNetBesties/discussions)
 - 📧 **Email**: info@moprojo.de
 
 ## 🗺️ Roadmap
