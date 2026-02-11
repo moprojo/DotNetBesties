@@ -1,10 +1,4 @@
-# ✨ DotNetBesties.Helpers
-
-> **Important Note**: This library is now published on NuGet as **[DotNetBesties](https://www.nuget.org/packages/DotNetBesties)**.
-Active development continues in this repository.
-Please check the NuGet package for the latest stable version and updates.
-
-----------------------------------------------------------
+# ✨ DotNetBesties
 
 [![.NET](https://img.shields.io/badge/.NET-9.0%20%7C%2010.0-512BD4?logo=dotnet)](https://dotnet.microsoft.com/)
 [![C#](https://img.shields.io/badge/C%23-13.0-239120?logo=csharp)](https://docs.microsoft.com/en-us/dotnet/csharp/)
@@ -76,12 +70,12 @@ A comprehensive collection of powerful helper classes and extension methods for 
 
 ### Using .NET CLI
 ```bash
-dotnet add package DotNetBesties.Helpers
+dotnet add package DotNetBesties
 ```
 
 ### Using Package Manager Console
 ```powershell
-Install-Package DotNetBesties.Helpers
+Install-Package DotNetBesties
 ```
 
 ### Using PackageReference

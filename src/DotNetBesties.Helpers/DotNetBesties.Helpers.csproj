@@ -8,19 +8,19 @@
     <NoWarn>$(NoWarn);CS8981</NoWarn>
 
     <!-- NuGet Package Settings -->
-    <PackageId>DotNetBesties.Helpers</PackageId>
-    <Version>1.1.1</Version>
+    <PackageId>DotNetBesties</PackageId>
+    <Version>1.2.2</Version>
     <Authors>Denny Straßburg</Authors>
     <Company>Moprojo</Company>
-    <Product>DotNetBesties.Helpers</Product>
+    <Product>DotNetBesties</Product>
     <Description>A comprehensive collection of helper classes and extension methods for .NET 9+ and .NET 10 applications. Includes string manipulation, validation, formatting, and more.</Description>
     <Copyright>Copyright © 2026 Moprojo</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/moprojo/DotNetBesties.Helpers</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/moprojo/DotNetBesties.Helpers</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/moprojo/DotNetBesties</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/moprojo/DotNetBesties</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>helpers;extensions;utilities;validation;formatting;dotnet;csharp;net10;net9</PackageTags>
-    <PackageReleaseNotes>Version 1.1.0: Multi-targeting support for .NET 9 and .NET 10.</PackageReleaseNotes>
+    <PackageReleaseNotes>Multi-targeting support for .NET 9 and .NET 10.</PackageReleaseNotes>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     
     <!-- Documentation -->
